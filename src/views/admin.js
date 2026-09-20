@@ -138,7 +138,7 @@ export function metricsPage({ m, posthog }) {
   return layout({ title: 'Metrics', body, admin: true, posthog });
 }
 
-export function evalPage({ runs, posthog }) {
+export function evalPage({ runs, posthog, flash }) {
   const pct = (x) => (x == null ? '—' : `${Math.round(x * 100)}%`);
   const latest = runs[0];
   const card = (r) => {
@@ -169,6 +169,8 @@ export function evalPage({ runs, posthog }) {
     .join('');
   const body = `
 <h1>Eval</h1>
+${flash ? `<div class="notice">${esc(flash)}</div>` : ''}
+<form method="post" action="/admin/eval/import" class="inline-form"><button class="btn btn-ghost btn-sm">Import committed runs</button></form>
 ${latest ? `<p class="muted">Latest run ${when(latest.run_at)} · dataset ${esc(latest.dataset_version)} · thresholds floor ${latest.thresholds.floor} / auto ${latest.thresholds.auto} · ${esc(latest.notes || '')}</p>${card(latest)}${matrix(latest.results)}` : '<p class="muted">No eval runs yet. Run <code>npm run eval</code>.</p>'}
 <div class="panel"><h3>Run history</h3><table><thead><tr><th>Run</th><th>Notes</th><th>Floor / auto</th><th>Routing</th><th>Clinical recall</th><th>False auto</th><th>Over-esc.</th><th>n</th></tr></thead><tbody>${history || '<tr><td colspan="8" class="muted">none</td></tr>'}</tbody></table></div>`;
   return layout({ title: 'Eval', body, admin: true, posthog });

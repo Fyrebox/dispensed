@@ -69,7 +69,23 @@ adminRouter.get('/metrics', async (req, res, next) => {
 });
 
 adminRouter.get('/eval', async (req, res, next) => {
-  try { res.send(evalPage({ runs: await store.evalRuns(), posthog: ph })); } catch (e) { next(e); }
+  try { res.send(evalPage({ runs: await store.evalRuns(), posthog: ph, flash: req.query.flash })); } catch (e) { next(e); }
+});
+
+// Import committed eval runs (data/eval/*.json) into this deployment's eval_runs.
+adminRouter.post('/eval/import', async (req, res, next) => {
+  try {
+    const dir = path.resolve(import.meta.dirname, '../../data/eval');
+    const db = await (await import('../db.js')).getDb();
+    let n = 0;
+    for (const f of (await fs.readdir(dir)).filter((x) => x.endsWith('.json'))) {
+      const run = JSON.parse(await fs.readFile(path.join(dir, f), 'utf8'));
+      const run_at = new Date(run._id.replace(/^run_/, '').replace(/-(\d\d)-(\d\d)-(\d\d\d)Z$/, ':$1:$2.$3Z'));
+      await db.collection('eval_runs').replaceOne({ _id: run._id }, { ...run, run_at, model: 'gpt-5.6-luna' }, { upsert: true });
+      n += 1;
+    }
+    res.redirect(`/admin/eval?flash=${encodeURIComponent(`Imported ${n} runs from data/eval`)}`);
+  } catch (e) { next(e); }
 });
 
 adminRouter.post('/reset', async (req, res, next) => {
