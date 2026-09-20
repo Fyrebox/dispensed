@@ -21,7 +21,7 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 const SNAPSHOT = path.join(ROOT, 'data', 'kb_chunks.json');
 const args = new Set(process.argv.slice(2));
 
-const MIN_WORDS = 150;
+const MIN_WORDS = 60;
 const MAX_WORDS = 400;
 
 // Sections on policy pages that are legal boilerplate a patient would never ask

@@ -100,7 +100,9 @@ export async function runPipeline({ text, conversationId, override, cfCountry, c
 
   const latency_ms = Date.now() - started;
   const cost_usd = estimateCostUsd(usage);
-  const citations = (composed?.cited_chunk_ids || [])
+  // Citations only when the patient actually sees composed text.
+  const showsComposed = reply !== handoffText(category, jurisdiction, routed.reason);
+  const citations = (showsComposed ? composed?.cited_chunk_ids || [] : [])
     .map((id) => chunks.find((c) => c.id === id))
     .filter(Boolean)
     .map((c) => ({ chunk_id: c.id, heading: c.heading, source_url: c.source_url }));
