@@ -2,14 +2,8 @@ import { layout, esc } from './layout.js';
 
 export function chatPage({ posthog, detected }) {
   const body = `
-<div class="banner">
-  <strong>Prototype built for a job application.</strong> Not affiliated with any healthcare provider. Answers are drawn from publicly published pages, conversations are synthetic, and nothing here is medical advice.
-</div>
-
 <section class="hero">
-  <span class="pill"><span class="dot"></span>Prototype · synthetic data · published pages only</span>
-  <h1>Ask a question about the service.</h1>
-  <p class="lede">A patient-support assistant that answers from the clinic's published pages only, with a citation on every fact, and says so when the pages don't cover something.</p>
+  <h1>Ask your question.</h1>
 </section>
 
 <section class="card chat" id="chat">
@@ -40,6 +34,10 @@ export function chatPage({ posthog, detected }) {
     <button type="button" class="chip" data-q="Can I drive after taking my medication?">Can I drive?</button>
   </div>
 </section>
+
+<div class="banner">
+  <strong>Prototype built for a job application.</strong> Not affiliated with any healthcare provider. Answers are drawn from publicly published pages, conversations are synthetic, and nothing here is medical advice.
+</div>
 
 <section class="steps" id="how">
   <h2>How it works</h2>
