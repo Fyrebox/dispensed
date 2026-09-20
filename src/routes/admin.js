@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { config } from '../config.js';
 import * as store from '../store.js';
+import { loadSnapshot, kbCounts } from '../kb.js';
 import { listPage, detailPage, metricsPage, evalPage, kbPage } from '../views/admin.js';
 
 export const adminRouter = Router();
@@ -52,7 +53,15 @@ adminRouter.post('/conversations/:id/promote', async (req, res, next) => {
 });
 
 adminRouter.get('/kb', async (req, res, next) => {
-  try { res.send(kbPage({ chunks: await store.listKb(), posthog: ph })); } catch (e) { next(e); }
+  try { res.send(kbPage({ chunks: await store.listKb(), counts: await kbCounts(), posthog: ph, flash: req.query.flash })); } catch (e) { next(e); }
+});
+
+// Fresh deploy: load the committed snapshot of published chunks (no fetching, embeds ~36k tokens).
+adminRouter.post('/kb/load-snapshot', async (req, res, next) => {
+  try {
+    const { count, tokens } = await loadSnapshot();
+    res.redirect(`/admin/kb?flash=${encodeURIComponent(`Loaded ${count} published chunks from snapshot (${tokens} embedding tokens)`)}`);
+  } catch (e) { next(e); }
 });
 
 adminRouter.get('/metrics', async (req, res, next) => {

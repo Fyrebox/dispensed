@@ -174,14 +174,18 @@ ${latest ? `<p class="muted">Latest run ${when(latest.run_at)} · dataset ${esc(
   return layout({ title: 'Eval', body, admin: true, posthog });
 }
 
-export function kbPage({ chunks, posthog }) {
+export function kbPage({ chunks, counts, posthog, flash }) {
   const rows = chunks
     .map(
       (c) => `<tr><td class="mono">${esc(c.id)}</td><td>${badge(c.origin)}</td><td>${esc(c.jurisdiction)}</td><td>${esc(c.topic)}</td><td><a href="${esc(c.source_url)}" target="_blank" rel="noopener">${esc(c.heading)}</a><div class="muted" style="font-size:12px">${esc(c.text.slice(0, 160))}…</div></td></tr>`,
     )
     .join('');
-  const counts = ['AU', 'UK', 'NZ', 'ALL'].map((j) => `${j} ${chunks.filter((c) => c.jurisdiction === j).length}`).join(' · ');
-  const body = `<h1>Knowledge base</h1><p class="muted">${chunks.length} chunks · ${counts} · ${chunks.filter((c) => c.origin === 'promoted').length} promoted from conversations</p>
+  const jurCounts = ['AU', 'UK', 'NZ', 'ALL'].map((j) => `${j} ${chunks.filter((c) => c.jurisdiction === j).length}`).join(' · ');
+  const body = `<h1>Knowledge base</h1>
+${flash ? `<div class="notice">${esc(flash)}</div>` : ''}
+${counts.mongo !== counts.chroma ? `<div class="notice">Store mismatch: ${counts.mongo} chunks in MongoDB, ${counts.chroma} in Chroma. Reload the snapshot.</div>` : ''}
+<p class="muted">${chunks.length} chunks · ${jurCounts} · ${chunks.filter((c) => c.origin === 'promoted').length} promoted from conversations · Chroma ${counts.chroma}
+<form method="post" action="/admin/kb/load-snapshot" class="inline-form" onsubmit="return confirm('Re-embed and load all published chunks from data/kb_chunks.json?')"><button class="btn btn-ghost btn-sm">Load published snapshot</button></form></p>
 <table><thead><tr><th>Id</th><th>Origin</th><th>Jur.</th><th>Topic</th><th>Heading</th></tr></thead><tbody>${rows}</tbody></table>`;
   return layout({ title: 'Knowledge base', body, admin: true, posthog });
 }

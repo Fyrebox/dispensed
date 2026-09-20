@@ -13,9 +13,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
 import { config } from '../src/config.js';
-import { getDb, closeDb } from '../src/db.js';
-import { getCollection } from '../src/chroma.js';
-import { embed } from '../src/llm/openai.js';
+import { closeDb } from '../src/db.js';
+import { storeChunks } from '../src/kb.js';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const SNAPSHOT = path.join(ROOT, 'data', 'kb_chunks.json');
@@ -193,40 +192,6 @@ async function collect() {
   return { chunks: all, pages };
 }
 
-async function store(chunks) {
-  const db = await getDb();
-  const col = await getCollection();
-  let tokens = 0;
-  const BATCH = 32;
-  for (let i = 0; i < chunks.length; i += BATCH) {
-    const batch = chunks.slice(i, i + BATCH);
-    const { vectors, tokens: t } = await embed(batch.map((c) => `${c.heading}\n${c.text}`));
-    tokens += t;
-    batch.forEach((c, j) => (c.embedding = vectors[j]));
-  }
-  // Replace every published chunk for the pages we just processed. Promoted chunks are untouched.
-  const urls = [...new Set(chunks.map((c) => c.source_url))];
-  await db.collection('kb_chunks').deleteMany({ origin: 'published', source_url: { $in: urls } });
-  for (const url of urls) await col.delete({ where: { source_url: url } });
-  const now = new Date();
-  await col.upsert({
-    ids: chunks.map((c) => c.id),
-    embeddings: chunks.map((c) => c.embedding),
-    documents: chunks.map((c) => c.text),
-    metadatas: chunks.map((c) => ({
-      source_url: c.source_url,
-      heading: c.heading,
-      jurisdiction: c.jurisdiction,
-      topic: c.topic,
-      origin: c.origin,
-    })),
-  });
-  await db.collection('kb_chunks').insertMany(
-    chunks.map((c) => ({ _id: c.id, ...c, created_at: now })),
-  );
-  return tokens;
-}
-
 async function main() {
   let chunks, pages;
   if (args.has('--from-snapshot')) {
@@ -243,7 +208,7 @@ async function main() {
     console.log(`\nDRY: ${pages} pages, ${chunks.length} chunks, ~${totalWords} words`, byJur);
     return;
   }
-  const tokens = await store(chunks);
+  const { tokens } = await storeChunks(chunks);
   console.log(`\nIngested ${pages} pages → ${chunks.length} chunks (${tokens} embedding tokens, ~${totalWords} words)`, byJur);
   await closeDb();
 }
