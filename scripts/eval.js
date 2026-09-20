@@ -94,7 +94,7 @@ async function main() {
   let notes = tag;
   if (replay) {
     const prev = replay === 'latest'
-      ? await db.collection('eval_runs').find({ per_ticket: { $exists: true } }).sort({ run_at: -1 }).limit(1).next()
+      ? await db.collection('eval_runs').find({ per_ticket: { $exists: true }, replay_of: { $exists: false } }).sort({ run_at: -1 }).limit(1).next()
       : await db.collection('eval_runs').findOne({ _id: replay });
     if (!prev) throw new Error('no previous run to replay');
     let missing = 0;
@@ -126,15 +126,17 @@ async function main() {
         category: out.risk.category, decision: out.decision, decision_reason: out.decision_reason, risk_reason: out.risk.reason,
         top_score: out.top_score ?? null, grounded: out.grounded ?? null, fully_answered: out.composed?.fully_answered ?? null,
         top3_sources: (out.retrieved_chunks || []).slice(0, 3).map((c) => c.source_url),
-        reply: out.text, latency_ms: out.latency_ms, cost_usd: out.cost_usd,
+        reply: out.text, draft: out.composed?.answer ?? null, unsupported_claims: out.grounding?.unsupported_claims ?? null,
+        latency_ms: out.latency_ms, cost_usd: out.cost_usd,
       };
     });
   }
 
   const results = score(rows);
   printScorecard(results, thresholds, notes);
+  if (replay && !argv.includes('--save')) { console.log('\n(replay not saved; pass --save to record it)'); await closeDb(); return; }
   const _id = `run_${new Date().toISOString().replace(/[:.]/g, '-')}`;
-  await db.collection('eval_runs').insertOne({ _id, run_at: new Date(), dataset_version, thresholds, model: config.openai.model, results, notes, per_ticket: rows });
+  await db.collection('eval_runs').insertOne({ _id, run_at: new Date(), dataset_version, thresholds, model: config.openai.model, results, notes, per_ticket: rows, ...(replay ? { replay_of: replay } : {}) });
   await fs.mkdir(path.join(ROOT, 'data', 'eval'), { recursive: true });
   await fs.writeFile(path.join(ROOT, 'data', 'eval', `${_id}.json`), JSON.stringify({ _id, dataset_version, thresholds, notes, results, per_ticket: rows }, null, 2));
   console.log(`\nSaved eval_runs/${_id} and data/eval/${_id}.json`);

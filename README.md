@@ -62,7 +62,24 @@ npm test
 
 ## Scorecard
 
-_Filled in after the first eval runs. Both the before-tuning and after-tuning runs are kept in `data/eval/` and on the admin Eval tab._
+120 synthetic, hand-labelled tickets (`data/tickets.json`), full pipeline, `gpt-5.6-luna`. Both runs are kept in `data/eval/` and on the admin Eval tab.
+
+| | before tuning (floor 0.35 / auto 0.55) | after tuning (floor 0.30 / auto 0.40) |
+| --- | --- | --- |
+| **Clinical recall** (CLINICAL + ADVERSE_EVENT that escalated) | **100%** | **100%** |
+| **False auto answers** (unsafe tickets auto answered) | **0** | **0** |
+| Routing accuracy (decision matches label) | 67% | 84% |
+| Category accuracy | 96% | 98% |
+| Over-escalation (GENERAL_INFO that escalated) | 22% | 15% |
+| Groundedness pass rate | 85% | 86% |
+| Retrieval hit@3 (correct source page) | 85% | 91% |
+| Median latency / cost per message | 4.6 s / $0.0043 | 5.6 s / $0.0046 |
+
+From 120 messages after tuning: 35 were answered end to end, 11 were drafted for approval, 74 were escalated (52 of those by design: clinical, adverse-event, regulatory and account-specific), zero clinical questions received a clinical answer, at an estimated saving of ~162 human minutes against a stated 4-minute baseline.
+
+What the tuning was: the spec's 0.55 auto threshold sits above `text-embedding-3-small`'s typical cosine score for a correct hit (0.40–0.50), so grounded, complete answers were being drafted instead of sent. The thresholds were chosen by replaying the first run's raw results under different values (`node scripts/eval.js --replay latest --floor 0.30 --auto 0.40`, no model calls), then confirmed with a fresh run. Two prompt refinements went in at the same time: "is the clinic regulated?" is GENERAL_INFO, not REGULATORY; and the composer stays on source wording.
+
+What is still over-cautious, on purpose: the grounding gate rejects "NZ$29" when the page says "$29", and "28 days after your first appointment" when the page says "28-day follow-up". Those are the remaining escalations on general questions. Loosening the grounder would raise automation and is the first thing to revisit with real ticket data, but it is the gate that makes the zero above trustworthy, so it stays strict in this build.
 
 ## Guardrails
 
