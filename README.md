@@ -4,6 +4,8 @@
 
 **Try it:** https://dispensed.up.railway.app — the admin console is at `/admin` (password in the cover letter).
 
+**Take-down.** This repository and the live demo exist for one job application. They will be deleted 60 days after submission regardless. If Dispensed would like them removed sooner, say so (reply to the application email) and they will be gone the same day.
+
 ## What it is
 
 A chat box a patient could use to ask the questions that land in support every day: how much is delivery, is the first consult free, what happens if I miss my appointment, who actually sends my medication, can I use my own pharmacy.
@@ -25,10 +27,11 @@ The assistant only knows what's public. The useful version knows the patient. In
 1. **Your own account, safely.** Verify the patient with a one-time code to their phone, then answer "where's my order", "has my script been approved", "when's my next appointment" from their actual record, instead of handing off.
 2. **Subscriptions.** Check whether a plan is active, when it was last renewed and when the next charge is, pause it, resume it, or renew it — the account questions that make up a large share of support volume.
 3. **Repeats and follow-ups.** Book or move the monthly review, request a repeat, and get a nudge before a script runs out, all in the chat.
-4. **The safety gate, for real.** Put the clinical / adverse-event / regulatory triage back in front, tuned on real ticket history rather than made-up questions, with a human approval queue for anything borderline.
-5. **A phone app.** Dispensed doesn't have an iPhone or Android app yet. The same assistant, plus order tracking, appointment reminders and a repeat-request button, is most of what a patient app needs to be.
-6. **Other channels.** The same brain behind the website live chat, email and SMS, so a patient gets one consistent answer wherever they ask.
-7. **Learning from the humans.** Every answer a support agent writes for a gap becomes something the assistant can answer next time — that's already built; the next step is measuring how much of the volume it takes over month by month.
+4. **Privacy requests, in the chat.** Dispensed operates under the Australian Privacy Act, UK GDPR and the NZ Privacy Act, and the privacy policies already promise patients access to their data and erasure on request. Once the patient is verified (same one-time code as above), the assistant can take those requests directly: "send me everything you hold about me" produces the export; "delete my records" opens an erasure request with a confirmation step, a clear note on what must be kept for clinical and legal retention, and a ticket the privacy officer signs off. Every request is logged with who asked, how they were verified, and what was done — the audit trail regulators ask for. Ordinary conversations get a retention limit too, so the assistant isn't quietly building a store of patient messages.
+5. **The safety gate, for real.** Put the clinical / adverse-event / regulatory triage back in front, tuned on real ticket history rather than made-up questions, with a human approval queue for anything borderline.
+6. **A phone app.** Dispensed doesn't have an iPhone or Android app yet. The same assistant, plus order tracking, appointment reminders and a repeat-request button, is most of what a patient app needs to be.
+7. **Other channels.** The same brain behind the website live chat, email and SMS, so a patient gets one consistent answer wherever they ask.
+8. **Learning from the humans.** Every answer a support agent writes for a gap becomes something the assistant can answer next time — that's already built; the next step is measuring how much of the volume it takes over month by month.
 
 ## Running it yourself
 
