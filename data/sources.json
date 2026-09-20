@@ -1,0 +1,40 @@
+{
+  "_note": "Published, public pages only. Nothing behind a login. jurisdiction: AU | UK | NZ. topic is a coarse tag used for eval hit-rate and admin display.",
+  "sources": [
+    { "url": "https://dispensed.com.au/faqs", "jurisdiction": "AU", "topic": "faq" },
+    { "url": "https://dispensed.com.au/info/how-dispensed-works", "jurisdiction": "AU", "topic": "process" },
+    { "url": "https://dispensed.com.au/info/pricing", "jurisdiction": "AU", "topic": "pricing" },
+    { "url": "https://dispensed.com.au/info/delivery", "jurisdiction": "AU", "topic": "delivery" },
+    { "url": "https://dispensed.com.au/terms-conditions", "jurisdiction": "AU", "topic": "terms" },
+    { "url": "https://dispensed.com.au/community-guidelines", "jurisdiction": "AU", "topic": "conduct" },
+    { "url": "https://dispensed.com.au/info/contact-us", "jurisdiction": "AU", "topic": "contact" },
+    { "url": "https://dispensed.com.au/about-us", "jurisdiction": "AU", "topic": "about" },
+    { "url": "https://dispensed.com.au/privacy-policy", "jurisdiction": "AU", "topic": "privacy" },
+
+    { "url": "https://dispensed.co.uk/info/how-does-dispensed-work", "jurisdiction": "UK", "topic": "process" },
+    { "url": "https://dispensed.co.uk/info/how-much-does-dispensed-cost", "jurisdiction": "UK", "topic": "pricing" },
+    { "url": "https://dispensed.co.uk/info/understanding-our-delivery-process", "jurisdiction": "UK", "topic": "delivery" },
+    { "url": "https://dispensed.co.uk/faqs/free-consultations", "jurisdiction": "UK", "topic": "faq" },
+    { "url": "https://dispensed.co.uk/faqs/medical-cannabis-card", "jurisdiction": "UK", "topic": "faq" },
+    { "url": "https://dispensed.co.uk/faqs/care-quality-commission-cqc", "jurisdiction": "UK", "topic": "faq" },
+    { "url": "https://dispensed.co.uk/faqs/legal-status", "jurisdiction": "UK", "topic": "regulatory" },
+    { "url": "https://dispensed.co.uk/faqs/work-driving-holidays", "jurisdiction": "UK", "topic": "regulatory" },
+    { "url": "https://dispensed.co.uk/faqs/medication", "jurisdiction": "UK", "topic": "clinical" },
+    { "url": "https://dispensed.co.uk/faqs/consuming-dosing", "jurisdiction": "UK", "topic": "clinical" },
+    { "url": "https://dispensed.co.uk/faqs/medical-uses", "jurisdiction": "UK", "topic": "clinical" },
+    { "url": "https://dispensed.co.uk/refund-policy", "jurisdiction": "UK", "topic": "refunds" },
+    { "url": "https://dispensed.co.uk/complaints-leaflet", "jurisdiction": "UK", "topic": "complaints" },
+    { "url": "https://dispensed.co.uk/zero-tolerance-policy", "jurisdiction": "UK", "topic": "conduct" },
+    { "url": "https://dispensed.co.uk/terms-conditions", "jurisdiction": "UK", "topic": "terms" },
+    { "url": "https://dispensed.co.uk/about-us", "jurisdiction": "UK", "topic": "about" },
+    { "url": "https://dispensed.co.uk/info/contact", "jurisdiction": "UK", "topic": "contact" },
+
+    { "url": "https://www.dispensed.co.nz/info/how-does-dispensed-work", "jurisdiction": "NZ", "topic": "process" },
+    { "url": "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost", "jurisdiction": "NZ", "topic": "pricing" },
+    { "url": "https://www.dispensed.co.nz/info/understanding-our-delivery-process", "jurisdiction": "NZ", "topic": "delivery" },
+    { "url": "https://www.dispensed.co.nz/terms-conditions", "jurisdiction": "NZ", "topic": "terms" },
+    { "url": "https://www.dispensed.co.nz/community-guidelines", "jurisdiction": "NZ", "topic": "conduct" },
+    { "url": "https://www.dispensed.co.nz/privacy-policy", "jurisdiction": "NZ", "topic": "privacy" },
+    { "url": "https://www.dispensed.co.nz/info/contact", "jurisdiction": "NZ", "topic": "contact" }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "triage-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Patient support triage agent prototype. Built for a job application. Not affiliated with any healthcare provider.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "ingest": "node scripts/ingest.js",
+    "query": "node scripts/query.js",
+    "eval": "node scripts/eval.js",
+    "seed": "node scripts/seed.js",
+    "test": "node --test test/*.test.js",
+    "lint": "node --check src/server.js && node --check scripts/ingest.js && node --check scripts/eval.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "chromadb": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "express-basic-auth": "^1.2.1",
+    "express-rate-limit": "^7.4.0",
+    "mongodb": "^6.9.0",
+    "openai": "^5.0.0"
+  }
+}
