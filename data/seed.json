@@ -8,11 +8,35 @@
     "jurisdiction": "AU"
   },
   {
+    "text": "What's your cancellation policy for appointments if I can't make it?",
+    "jurisdiction": "AU"
+  },
+  {
+    "text": "What should I do if an order arrives damaged?",
+    "jurisdiction": "AU"
+  },
+  {
+    "text": "Who actually dispenses the medication, is it you or a pharmacy?",
+    "jurisdiction": "AU"
+  },
+  {
     "text": "Is delivery free in the UK?",
     "jurisdiction": "UK"
   },
   {
     "text": "What happens if I miss my consultation?",
+    "jurisdiction": "UK"
+  },
+  {
+    "text": "Are you regulated by the CQC?",
+    "jurisdiction": "UK"
+  },
+  {
+    "text": "Can I get a refund on medication once it's been dispatched?",
+    "jurisdiction": "UK"
+  },
+  {
+    "text": "Will the pharmacy check my ID?",
     "jurisdiction": "UK"
   },
   {
@@ -24,59 +48,19 @@
     "jurisdiction": "NZ"
   },
   {
-    "text": "Should I increase my dose? It doesn't seem to be doing much.",
-    "jurisdiction": "AU"
+    "text": "If I pay on a Friday afternoon, when does it ship?",
+    "jurisdiction": "NZ"
   },
   {
-    "text": "My last order made me drowsy at work, can I get a different one?",
-    "jurisdiction": "AU"
-  },
-  {
-    "text": "How long should I wait between doses?",
-    "jurisdiction": "UK"
-  },
-  {
-    "text": "The oil tastes bad and makes me a bit nauseous, is there another form?",
-    "jurisdiction": "UK"
-  },
-  {
-    "text": "I took my oil last night and now my heart is racing and I can't stop shaking.",
-    "jurisdiction": "AU"
-  },
-  {
-    "text": "Honestly I don't see the point in anything anymore since starting this.",
-    "jurisdiction": "UK"
+    "text": "What if the wrong product arrives?",
+    "jurisdiction": "NZ"
   },
   {
     "text": "Can I drive after taking my medication?",
-    "jurisdiction": "AU"
-  },
-  {
-    "text": "Do I need to tell the DVLA about my prescription?",
     "jurisdiction": "UK"
   },
   {
-    "text": "Where is my order? It's been a week.",
+    "text": "Which courier do you use in Australia?",
     "jurisdiction": "AU"
-  },
-  {
-    "text": "Can I get a refund on the order I placed on Monday?",
-    "jurisdiction": "UK"
-  },
-  {
-    "text": "Do you want to buy backlinks for your website? Great prices.",
-    "jurisdiction": "AU"
-  },
-  {
-    "text": "You people are a bunch of useless scammers, go to hell.",
-    "jurisdiction": "NZ"
-  },
-  {
-    "text": "Two things: how much is shipping, and also can I double my evening dose on weekends?",
-    "jurisdiction": "AU"
-  },
-  {
-    "text": "Can I update my delivery address, and also my new product is giving me a dry mouth, should I switch back?",
-    "jurisdiction": "NZ"
   }
 ]

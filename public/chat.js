@@ -26,13 +26,11 @@
       index[id] ? `<sup><a href="${esc(cites[index[id] - 1].source_url)}" target="_blank" rel="noopener" title="${esc(cites[index[id] - 1].heading)}">${index[id]}</a></sup>` : '',
     );
     const tag =
-      reply.decision === 'AUTO_ANSWER' && reply.risk.category !== 'OUT_OF_SCOPE'
+      reply.decision === 'ANSWERED'
         ? '<span class="tag auto">Answered from published pages</span>'
-        : reply.decision === 'DRAFT_FOR_APPROVAL'
-          ? '<span class="tag draft">Drafted for human review</span>'
-          : reply.decision === 'ESCALATE'
-            ? `<span class="tag esc">Passed to a human · ${esc(reply.risk.category.toLowerCase().replace('_', ' '))}</span>`
-            : '';
+        : reply.decision === 'PARTIAL'
+          ? '<span class="tag draft">Partly covered by published pages</span>'
+          : '<span class="tag esc">Not covered by published pages</span>';
     const sources = cites.length
       ? `<div class="sources">Sources: ${cites.map((c, i) => `<a href="${esc(c.source_url)}" target="_blank" rel="noopener">[${i + 1}] ${esc(c.heading)}</a>`).join(' · ')}</div>`
       : '';
@@ -67,7 +65,7 @@
       conversationId = data.conversation_id;
       pending.className = 'msg agent';
       pending.innerHTML = render(data);
-      if (window.posthog) posthog.capture('decision_shown', { decision: data.decision, category: data.risk.category, jurisdiction: data.jurisdiction });
+      if (window.posthog) posthog.capture('decision_shown', { decision: data.decision, jurisdiction: data.jurisdiction });
     } catch (e) {
       pending.className = 'msg agent';
       pending.innerHTML = `<div class="bubble">Something went wrong (${esc(e.message)}). Please try again.</div>`;

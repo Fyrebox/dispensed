@@ -1,3 +1,5 @@
+> **Status (20 Sep 2026):** built as planned, then simplified. The risk classifier and grounding gate described below were implemented and measured (100% clinical recall, 0 unsafe auto-answers on 120 tickets) and then removed from the demo because they were too conservative to show retrieval working. The live build is plain RAG with citations; see README for the current architecture and the production note.
+
 # Triage Prototype — Implementation Plan
 
 Companion to `Dispensed_Triage_Prototype_Build_Spec.md`. The spec is the brief; this document records what was found on the published sites, the decisions that differ from the spec, and the concrete build order.

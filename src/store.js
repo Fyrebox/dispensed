@@ -6,12 +6,12 @@ import { runPipeline } from './pipeline/run.js';
 
 const oid = (id) => (id instanceof ObjectId ? id : new ObjectId(String(id)));
 
-export async function listConversations({ status, decision, category, limit = 200 } = {}) {
+export async function listConversations({ status, decision, jurisdiction, limit = 200 } = {}) {
   const db = await getDb();
   const q = {};
   if (status) q.status = status;
   if (decision) q.decision = decision;
-  if (category) q.risk_category = category;
+  if (jurisdiction) q.jurisdiction = jurisdiction;
   return db.collection('conversations').find(q).sort({ started_at: -1 }).limit(limit).toArray();
 }
 
@@ -72,41 +72,32 @@ export const BASELINE_MINUTES = 4; // stated assumption: average human handling 
 export async function metrics() {
   const db = await getDb();
   const agent = db.collection('messages');
-  const [total, byDecision, byCategory, escalationReasons, clinicalAuto, latencies] = await Promise.all([
+  const [total, byDecision, byJur, gaps, latencies] = await Promise.all([
     agent.countDocuments({ role: 'agent' }),
     agent.aggregate([{ $match: { role: 'agent' } }, { $group: { _id: '$decision', n: { $sum: 1 } } }]).toArray(),
-    agent.aggregate([{ $match: { role: 'agent' } }, { $group: { _id: '$risk.category', n: { $sum: 1 } } }]).toArray(),
-    agent
-      .aggregate([
-        { $match: { role: 'agent', decision: 'ESCALATE' } },
-        { $group: { _id: { category: '$risk.category', reason: '$decision_reason' }, n: { $sum: 1 } } },
-        { $sort: { n: -1 } },
-      ])
-      .toArray(),
-    // The number that should read zero. Any model-generated text auto-sent on an unsafe category.
-    agent.countDocuments({ role: 'agent', decision: 'AUTO_ANSWER', 'risk.category': { $in: ['CLINICAL', 'ADVERSE_EVENT'] } }),
-    agent.find({ role: 'agent' }, { projection: { latency_ms: 1, cost_usd: 1 } }).toArray(),
+    agent.aggregate([{ $match: { role: 'agent' } }, { $group: { _id: '$jurisdiction', n: { $sum: 1 } } }]).toArray(),
+    // Questions the published pages could not answer: the list of what to write or promote next.
+    db.collection('conversations').find({ decision: { $in: ['NOT_COVERED', 'PARTIAL'] } }).sort({ started_at: -1 }).limit(15).toArray(),
+    agent.find({ role: 'agent' }, { projection: { latency_ms: 1, cost_usd: 1, top_score: 1 } }).toArray(),
   ]);
   const count = (arr, k) => arr.find((x) => x._id === k)?.n ?? 0;
-  const auto = count(byDecision, 'AUTO_ANSWER');
-  const draft = count(byDecision, 'DRAFT_FOR_APPROVAL');
-  const esc = count(byDecision, 'ESCALATE');
+  const answered = count(byDecision, 'ANSWERED');
+  const partial = count(byDecision, 'PARTIAL');
+  const notCovered = count(byDecision, 'NOT_COVERED');
   const median = (xs) => {
     const s = xs.filter((x) => typeof x === 'number').sort((a, b) => a - b);
     return s.length ? s[Math.floor(s.length / 2)] : 0;
   };
   return {
-    total,
-    auto, draft, esc,
+    total, answered, partial, notCovered,
     pct: (n) => (total ? Math.round((n / total) * 100) : 0),
-    byCategory: byCategory.map((x) => ({ category: x._id, n: x.n })).sort((a, b) => b.n - a.n),
-    escalationReasons: escalationReasons.map((x) => ({ ...x._id, n: x.n })),
-    clinicalAuto,
-    // Auto answers save the full baseline; drafts save roughly half (review vs write).
-    minutesSaved: Math.round(auto * BASELINE_MINUTES + draft * BASELINE_MINUTES * 0.5),
+    byJur: byJur.map((x) => ({ jurisdiction: x._id, n: x.n })).sort((a, b) => b.n - a.n),
+    gaps,
+    minutesSaved: Math.round(answered * BASELINE_MINUTES + partial * BASELINE_MINUTES * 0.5),
     baseline: BASELINE_MINUTES,
     medianLatency: median(latencies.map((x) => x.latency_ms)),
     medianCost: median(latencies.map((x) => x.cost_usd)),
+    medianTopScore: median(latencies.map((x) => x.top_score)),
   };
 }
 

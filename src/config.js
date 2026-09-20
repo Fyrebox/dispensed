@@ -18,10 +18,6 @@ export const config = {
     user: process.env.ADMIN_USER || 'admin',
     pass: process.env.ADMIN_PASS || 'change-me',
   },
-  thresholds: {
-    floor: num(process.env.SCORE_FLOOR, 0.35),
-    auto: num(process.env.SCORE_AUTO, 0.55),
-  },
   posthog: {
     key: process.env.POSTHOG_KEY || '',
     host: process.env.POSTHOG_HOST || 'https://us.i.posthog.com',

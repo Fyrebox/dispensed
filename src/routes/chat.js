@@ -28,7 +28,6 @@ chatRouter.post('/api/chat', limiter, async (req, res, next) => {
       conversation_id: out.conversation_id,
       text: out.text,
       decision: out.decision,
-      risk: { category: out.risk.category },
       jurisdiction: out.jurisdiction,
       jurisdiction_source: out.jurisdiction_source,
       citations: out.citations,

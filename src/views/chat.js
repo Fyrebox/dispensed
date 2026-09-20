@@ -9,7 +9,7 @@ export function chatPage({ posthog, detected }) {
 <section class="hero">
   <span class="pill"><span class="dot"></span>Prototype · synthetic data · published pages only</span>
   <h1>Ask a question about the service.</h1>
-  <p class="lede">A patient-support triage agent. It answers what published pages can answer, with citations, and hands everything else to a human — every clinical question, every time.</p>
+  <p class="lede">A patient-support assistant that answers from the clinic's published pages only, with a citation on every fact, and says so when the pages don't cover something.</p>
 </section>
 
 <section class="card chat" id="chat">
@@ -26,7 +26,7 @@ export function chatPage({ posthog, detected }) {
     </div>
   </div>
   <div class="thread" id="thread">
-    <div class="msg agent"><div class="bubble">Hi. Ask me about pricing, delivery, eligibility, appointments or policies. If your question is about your treatment, your symptoms, or your own order, I'll pass it straight to a person.</div></div>
+    <div class="msg agent"><div class="bubble">Hi. Ask me about pricing, delivery, eligibility, appointments, prescriptions or policies. Everything I say comes from the published pages, with a link to the source.</div></div>
   </div>
   <form class="composer" id="form">
     <textarea id="input" rows="2" placeholder="Type a message…" required maxlength="2000"></textarea>
@@ -36,17 +36,19 @@ export function chatPage({ posthog, detected }) {
     <button type="button" class="chip" data-q="How much does delivery cost and how long does it take?">Delivery cost and time</button>
     <button type="button" class="chip" data-q="What happens if I miss my appointment?">Missed appointment</button>
     <button type="button" class="chip" data-q="Is the first consultation free?">Is the first consult free?</button>
-    <button type="button" class="chip warn" data-q="My last order made me drowsy at work, can I get a different one?">A disguised clinical one</button>
+    <button type="button" class="chip" data-q="Who actually dispenses the medication, is it you or a pharmacy?">Who dispenses it?</button>
+    <button type="button" class="chip" data-q="Can I drive after taking my medication?">Can I drive?</button>
   </div>
 </section>
 
 <section class="steps" id="how">
-  <h2>How it decides</h2>
+  <h2>How it works</h2>
   <ol>
-    <li><span class="num">01</span><div><strong>Risk gate first.</strong> Before anything is looked up, a classifier reads the message. Clinical, adverse-event and regulatory questions stop here and go to a human — even if a published page happens to contain something that looks like an answer.</div></li>
-    <li><span class="num">02</span><div><strong>Retrieve and compose.</strong> Safe questions pull the top published passages for your country, and a reply is written only from those passages, with a citation on every fact.</div></li>
-    <li><span class="num">03</span><div><strong>Grounding gate second.</strong> A separate check verifies each claim against the cited passages. Fully grounded and confident: sent. Partial: drafted for a human. Unsupported: escalated. Every decision is logged and reviewable in the <a href="/admin">admin console</a>.</div></li>
+    <li><span class="num">01</span><div><strong>Published pages only.</strong> The FAQ, how-it-works, pricing, delivery, terms and policy pages of three country sites (AU, UK, NZ) are chunked and embedded into a vector store. Nothing behind a login.</div></li>
+    <li><span class="num">02</span><div><strong>Retrieve for your country, then answer from that.</strong> The country comes from the request (Cloudflare header) or the toggle above. The top passages are retrieved and the reply is written only from them, with a citation on every fact. If they don't cover the question, it says so.</div></li>
+    <li><span class="num">03</span><div><strong>Everything is logged.</strong> Each conversation, the passages retrieved with their scores, and the reply are reviewable in the <a href="/admin">admin console</a>. Questions the pages can't answer show up as gaps; a human answer can be promoted into the knowledge base in one click.</div></li>
   </ol>
+  <p class="muted" style="font-size:13px;margin-top:16px">Production note: a risk classifier that routes clinical, adverse-event and regulatory questions to a human before retrieval was built and measured for this prototype (100% clinical recall, 0 unsafe auto-answers on a 120-ticket set) and then removed from the demo because it was too conservative to show the retrieval working. It goes back in front of this pipeline before anything touches a real patient.</p>
 </section>
 <script src="/chat.js"></script>`;
   return layout({ title: 'Support chat', body, posthog });

@@ -14,7 +14,7 @@ const ph = config.posthog;
 
 adminRouter.get('/', async (req, res, next) => {
   try {
-    const filters = { status: req.query.status, decision: req.query.decision, category: req.query.category };
+    const filters = { status: req.query.status, decision: req.query.decision, jurisdiction: req.query.jurisdiction };
     res.send(listPage({ conversations: await store.listConversations(filters), filters, posthog: ph }));
   } catch (e) { next(e); }
 });

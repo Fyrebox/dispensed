@@ -1,0 +1,1233 @@
+{
+  "_id": "run_2026-09-20T11-28-18-316Z",
+  "dataset_version": "v3",
+  "notes": "rag v1, hybrid rerank",
+  "results": {
+    "n": 54,
+    "retrieval_hit_at_3": 0.9074074074074074,
+    "retrieval_hit_at_5": 0.9444444444444444,
+    "cited_correct_page": 0.8518518518518519,
+    "answered_rate": 0.8888888888888888,
+    "partial_rate": 0.09259259259259259,
+    "not_covered_rate": 0.018518518518518517,
+    "median_top_score": 0.5994,
+    "median_latency_ms": 2187,
+    "median_cost_usd": 0.00314022
+  },
+  "per_ticket": [
+    {
+      "id": "t_001",
+      "text": "How much does delivery cost in Australia?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/info/delivery",
+      "decision": "PARTIAL",
+      "decision_reason": "partly answered: The available information does not clearly state the delivery cost for treatment plans priced at $129 or more.",
+      "top_score": 0.578,
+      "top_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/info/pricing",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/contact-us"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/faqs"
+      ],
+      "reply": "In Australia, a flat $9.95 shipping fee applies to treatment plans below $129. [kb_AU_faqs_18] Express delivery is also described as included in the healthcare plan’s single monthly payment, so the exact cost for your plan is unclear from the available information; please contact the support team to confirm. [kb_AU_how-dispensed-works_10] [kb_AU_faqs_11]",
+      "latency_ms": 4045,
+      "cost_usd": 0.00472016
+    },
+    {
+      "id": "t_002",
+      "text": "How long does delivery take to regional Victoria?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/info/delivery",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.3919,
+      "top_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/privacy-policy",
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/info/delivery"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/faqs"
+      ],
+      "reply": "Delivery to regional Victoria typically takes 2 to 5 business days, depending on your location. [kb_AU_faqs_18]",
+      "latency_ms": 2460,
+      "cost_usd": 0.00272268
+    },
+    {
+      "id": "t_003",
+      "text": "Is the first consultation free?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/faqs",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.7013,
+      "top_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/about-us",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/faqs"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/about-us"
+      ],
+      "reply": "Yes, the first consultation is free, with no onboarding or upfront consultation fees. [kb_AU_faqs_9] [kb_AU_about-us_8]",
+      "latency_ms": 2151,
+      "cost_usd": 0.00217887
+    },
+    {
+      "id": "t_004",
+      "text": "Do I need a referral from my GP to use the service?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/faqs",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.6909,
+      "top_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/info/pricing",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/info/how-dispensed-works"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/faqs"
+      ],
+      "reply": "No, you do not need a referral from your GP to use Dispensed. You can complete a short online questionnaire and, if suitable, book a telehealth consultation directly with one of the doctors. [kb_AU_faqs_14]",
+      "latency_ms": 2380,
+      "cost_usd": 0.00245276
+    },
+    {
+      "id": "t_005",
+      "text": "How much do healthcare plans cost per month?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/faqs",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.7477,
+      "top_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/info/pricing",
+        "https://dispensed.com.au/faqs"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/how-dispensed-works"
+      ],
+      "reply": "Healthcare plans vary depending on your individual needs and start from $99 per month. [kb_AU_faqs_10] The monthly payment includes your treatment, monthly medical review and clinical support, with no hidden extras. [kb_AU_how-dispensed-works_4]",
+      "latency_ms": 2553,
+      "cost_usd": 0.0027689299999999997
+    },
+    {
+      "id": "t_006",
+      "text": "Can I cancel my plan whenever I want, or is there a lock-in contract?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/faqs",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.5994,
+      "top_sources": [
+        "https://dispensed.com.au/about-us",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/how-dispensed-works"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/faqs"
+      ],
+      "reply": "You can cancel your plan whenever you want—there is no lock-in contract, cancellation fee or penalty. You can also pause your monthly plan at any time, with no hidden costs or long-term commitment. [kb_AU_faqs_12]",
+      "latency_ms": 2444,
+      "cost_usd": 0.0023053400000000003
+    },
+    {
+      "id": "t_007",
+      "text": "What's your cancellation policy for appointments if I can't make it?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/terms-conditions",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.673,
+      "top_sources": [
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/about-us",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/faqs"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/terms-conditions"
+      ],
+      "reply": "For appointment changes or cancellations, please provide at least 24 hours’ notice. If you miss or cancel an appointment with less than 24 hours’ notice, you’ll be charged a cancellation fee equal to the consultation cost. [kb_AU_terms-conditions_7]",
+      "latency_ms": 2895,
+      "cost_usd": 0.00352403
+    },
+    {
+      "id": "t_008",
+      "text": "Is the packaging discreet?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/faqs",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.6394,
+      "top_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/pricing",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/info/pricing",
+        "https://dispensed.com.au/faqs"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/pricing"
+      ],
+      "reply": "Yes. All orders are sent in plain packaging with no identifying details visible, and healthcare plans are delivered in discreet, professional medical packaging. [kb_AU_faqs_18] [kb_AU_pricing_3]",
+      "latency_ms": 1853,
+      "cost_usd": 0.0028726
+    },
+    {
+      "id": "t_009",
+      "text": "Do I have to sign for the delivery?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/terms-conditions",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.5148,
+      "top_sources": [
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/info/delivery",
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/faqs"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/terms-conditions"
+      ],
+      "reply": "Yes. Partner pharmacy deliveries require a signature upon acceptance, so someone should be available to sign between 9am and 5pm, Monday to Friday. Prescription products cannot be given an authority-to-leave direction; if nobody is available, the package will be taken to the nearest post office for collection and a card with instructions will be left at your address. [kb_AU_terms-conditions_8]",
+      "latency_ms": 2099,
+      "cost_usd": 0.00366893
+    },
+    {
+      "id": "t_010",
+      "text": "What happens if I'm not home when the parcel arrives?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/terms-conditions",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.3464,
+      "top_sources": [
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/terms-conditions"
+      ],
+      "reply": "Someone must be available to sign for your delivery between 9am and 5pm, Monday to Friday, as prescription products cannot be left without a signature. If nobody is present, the parcel will be taken to the nearest post office for collection, and a card with collection instructions will be left at your address. [kb_AU_terms-conditions_8]",
+      "latency_ms": 1958,
+      "cost_usd": 0.0037002399999999996
+    },
+    {
+      "id": "t_011",
+      "text": "What should I do if an order arrives damaged?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/terms-conditions",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.4732,
+      "top_sources": [
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/delivery",
+        "https://dispensed.com.au/info/contact-us",
+        "https://dispensed.com.au/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/info/contact-us"
+      ],
+      "reply": "Contact Dispensed within 3 days of receiving the Treatment Pack if the order arrived damaged. [kb_AU_terms-conditions_11] You may need to provide an image of the damaged product to process a refund or replacement, and the freight cost for returning it will be covered. [kb_AU_terms-conditions_11] You can contact support at support@dispensed.com.au or use the website’s live chat. [kb_AU_contact-us_1]",
+      "latency_ms": 2705,
+      "cost_usd": 0.0043164499999999995
+    },
+    {
+      "id": "t_012",
+      "text": "Can I get a same-day appointment?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/faqs",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.8113,
+      "top_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/faqs"
+      ],
+      "reply": "Same-day consultations may be available, depending on clinician availability. You can view and select available appointment times through the booking system. [kb_AU_faqs_16]",
+      "latency_ms": 2837,
+      "cost_usd": 0.0022101599999999996
+    },
+    {
+      "id": "t_013",
+      "text": "How do I contact support?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/info/contact-us",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.5689,
+      "top_sources": [
+        "https://dispensed.com.au/info/contact-us",
+        "https://dispensed.com.au/info/delivery",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/about-us",
+        "https://dispensed.com.au/info/contact-us"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/info/contact-us",
+        "https://dispensed.com.au/info/delivery"
+      ],
+      "reply": "You can contact support by emailing support@dispensed.com.au for general enquiries or documentation, or by using the Live Chat at the bottom of the website. [kb_AU_contact-us_1] The support team is available Monday to Friday, 9 am–5 pm. [kb_AU_delivery_2]",
+      "latency_ms": 2027,
+      "cost_usd": 0.0025651199999999997
+    },
+    {
+      "id": "t_014",
+      "text": "What are your support hours?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/info/delivery",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.4484,
+      "top_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/about-us",
+        "https://dispensed.com.au/info/delivery",
+        "https://dispensed.com.au/info/contact-us",
+        "https://dispensed.com.au/info/contact-us"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/info/delivery"
+      ],
+      "reply": "Our support team is available Monday to Friday, 9 am–5 pm. You can also contact the live chat on the Dispensed website. [kb_AU_delivery_2]",
+      "latency_ms": 1711,
+      "cost_usd": 0.0022151199999999997
+    },
+    {
+      "id": "t_015",
+      "text": "How do I switch to you from another clinic?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/faqs",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.7103,
+      "top_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/how-dispensed-works",
+        "https://dispensed.com.au/about-us",
+        "https://dispensed.com.au/info/pricing",
+        "https://dispensed.com.au/faqs"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/faqs"
+      ],
+      "reply": "You can switch to Dispensed by completing the registration process. If a consultation is suitable, you can book a telehealth appointment; during it, your clinician can review your existing healthcare plan and medical history. Dispensed will request a discharge summary from your previous clinic, then your new clinician can continue coordinating your care through Dispensed. [kb_AU_faqs_19]",
+      "latency_ms": 2420,
+      "cost_usd": 0.0028214499999999997
+    },
+    {
+      "id": "t_016",
+      "text": "Are your doctors registered in Australia?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/faqs",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.6447,
+      "top_sources": [
+        "https://dispensed.com.au/about-us",
+        "https://dispensed.com.au/privacy-policy",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/info/how-dispensed-works"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/about-us",
+        "https://dispensed.com.au/faqs"
+      ],
+      "reply": "Yes. Dispensed’s doctors are registered in Australia, and the clinic is operated entirely within Australia with a dedicated team of Australian-registered doctors. [kb_AU_about-us_11] Clinicians working with the platform are also registered and regulated by the appropriate Australian professional bodies, with their credentials verified. [kb_AU_faqs_7]",
+      "latency_ms": 2258,
+      "cost_usd": 0.00339014
+    },
+    {
+      "id": "t_017",
+      "text": "How often do I need a follow-up consultation to stay on the service?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/terms-conditions",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.6058,
+      "top_sources": [
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/about-us",
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/terms-conditions"
+      ],
+      "reply": "You need to schedule and attend a follow-up consultation at least every six months to continue receiving the service. [kb_AU_terms-conditions_8] If you do not schedule and attend the required follow-up consultations, your subscription may be suspended or terminated. [kb_AU_terms-conditions_12]",
+      "latency_ms": 2140,
+      "cost_usd": 0.0030928
+    },
+    {
+      "id": "t_018",
+      "text": "How do I request a copy of the personal information you hold about me?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/privacy-policy",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.6456,
+      "top_sources": [
+        "https://dispensed.com.au/privacy-policy",
+        "https://dispensed.com.au/privacy-policy",
+        "https://dispensed.com.au/privacy-policy",
+        "https://dispensed.com.au/privacy-policy",
+        "https://dispensed.com.au/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/privacy-policy"
+      ],
+      "reply": "You can request a copy of the personal information Dispensed holds about you by emailing hello@dispensed.com.au. [kb_AU_privacy-policy_3] A small administrative fee may be payable, and Dispensed may refuse access in certain circumstances set out in the Privacy Act 1988 (Cth). [kb_AU_privacy-policy_3]",
+      "latency_ms": 2090,
+      "cost_usd": 0.0045728
+    },
+    {
+      "id": "t_019",
+      "text": "Do I need to be 18 to use the service?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/terms-conditions",
+      "decision": "NOT_COVERED",
+      "decision_reason": "no published passage covers the question",
+      "top_score": 0.4857,
+      "top_sources": [
+        "https://dispensed.com.au/privacy-policy",
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/privacy-policy"
+      ],
+      "cited_sources": [],
+      "reply": "The information available here does not state whether you need to be 18 to use the service. Please contact the support team to confirm the age requirement.",
+      "latency_ms": 2086,
+      "cost_usd": 0.00428524
+    },
+    {
+      "id": "t_020",
+      "text": "Who actually dispenses the medication, is it you or a pharmacy?",
+      "jurisdiction": "AU",
+      "expected_source_url": "https://dispensed.com.au/terms-conditions",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.5808,
+      "top_sources": [
+        "https://dispensed.com.au/terms-conditions",
+        "https://dispensed.com.au/info/delivery",
+        "https://dispensed.com.au/info/delivery",
+        "https://dispensed.com.au/faqs",
+        "https://dispensed.com.au/about-us"
+      ],
+      "cited_sources": [
+        "https://dispensed.com.au/info/delivery",
+        "https://dispensed.com.au/terms-conditions"
+      ],
+      "reply": "Your medication is dispensed by a pharmacy, usually one of Dispensed’s partner pharmacies. If your prescription is approved, it is sent to the partner pharmacy, which prepares the medication for dispatch. [kb_AU_delivery_1] You are not required to use a partner pharmacy and can request a copy of your prescription to take to a pharmacy of your choice. [kb_AU_terms-conditions_11]",
+      "latency_ms": 2073,
+      "cost_usd": 0.0031427800000000004
+    },
+    {
+      "id": "t_021",
+      "text": "Is delivery free in the UK?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/info/how-much-does-dispensed-cost",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.5881,
+      "top_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/info/how-much-does-dispensed-cost",
+        "https://dispensed.co.uk/info/how-much-does-dispensed-cost",
+        "https://dispensed.co.uk/info/understanding-our-delivery-process",
+        "https://dispensed.co.uk/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/info/how-much-does-dispensed-cost",
+        "https://dispensed.co.uk/info/how-much-does-dispensed-cost"
+      ],
+      "reply": "Yes—delivery is free in the UK for orders over £99 [kb_UK_how-much-does-dispensed-cost_1]. Orders over £99 include tracked shipping [kb_UK_how-much-does-dispensed-cost_2].",
+      "latency_ms": 2245,
+      "cost_usd": 0.0032126399999999997
+    },
+    {
+      "id": "t_022",
+      "text": "How long until I get my medication after the consultation?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/info/understanding-our-delivery-process",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.612,
+      "top_sources": [
+        "https://dispensed.co.uk/info/understanding-our-delivery-process",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/info/how-much-does-dispensed-cost",
+        "https://dispensed.co.uk/refund-policy"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/info/understanding-our-delivery-process"
+      ],
+      "reply": "Most patients receive their medication within 5–8 working days of their consultation. [kb_UK_understanding-our-delivery-process_1] This can vary depending on your location, case complexity and processing timelines; payment must be received and the pharmacy must have a hard copy of your prescription before the medication is prepared for dispatch. [kb_UK_understanding-our-delivery-process_1]",
+      "latency_ms": 2055,
+      "cost_usd": 0.00314022
+    },
+    {
+      "id": "t_023",
+      "text": "How much does the consultation cost?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/faqs/free-consultations",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 3 cited passage(s)",
+      "top_score": 0.6402,
+      "top_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/refund-policy"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/terms-conditions"
+      ],
+      "reply": "The consultation normally costs £19. [kb_UK_how-does-dispensed-work_8] This applies to initial and follow-up consultations, although free consultations or promotional reductions may sometimes be offered. [kb_UK_terms-conditions_6] [kb_UK_terms-conditions_7]",
+      "latency_ms": 2035,
+      "cost_usd": 0.00311889
+    },
+    {
+      "id": "t_024",
+      "text": "What's the £1 verification fee about?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/faqs/free-consultations",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.4773,
+      "top_sources": [
+        "https://dispensed.co.uk/faqs/free-consultations",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/refund-policy",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/info/how-does-dispensed-work"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/faqs/free-consultations"
+      ],
+      "reply": "From 8 July 2026, new patients may be asked to pay a £1 account verification fee before booking their initial consultation. It is used to verify your account and payment method, and is refundable upon request. [kb_UK_free-consultations_1]",
+      "latency_ms": 2598,
+      "cost_usd": 0.00358643
+    },
+    {
+      "id": "t_025",
+      "text": "What happens if I miss my consultation?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/refund-policy",
+      "decision": "PARTIAL",
+      "decision_reason": "partly answered: The exact notice period and resulting charge for your appointment are unclear because the published pages state different notice periods; please contact the support team.",
+      "top_score": 0.6817,
+      "top_sources": [
+        "https://dispensed.co.uk/refund-policy",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/refund-policy",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/info/how-does-dispensed-work"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/refund-policy",
+        "https://dispensed.co.uk/terms-conditions"
+      ],
+      "reply": "If you miss your initial consultation, a £19 non-attendance fee may be applied where clinical time was reserved and the appointment could not reasonably be offered to another patient. [kb_UK_refund-policy_3] The fee is not automatic and will not apply if the clinic cancels or reschedules the appointment, there is a platform issue, or exceptional circumstances apply. [kb_UK_refund-policy_3] The published pages give different notice periods for cancellations or rescheduling, so please contact the support team to confirm how this applies to your appointment. [kb_UK_refund-policy_3] [kb_UK_terms-conditions_7]",
+      "latency_ms": 4791,
+      "cost_usd": 0.00608141
+    },
+    {
+      "id": "t_026",
+      "text": "Roughly how much does the flower cost per gram?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/info/how-much-does-dispensed-cost",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.6005,
+      "top_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/info/how-much-does-dispensed-cost",
+        "https://dispensed.co.uk/faqs/consuming-dosing",
+        "https://dispensed.co.uk/faqs/medication",
+        "https://dispensed.co.uk/info/how-does-dispensed-work"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/info/how-much-does-dispensed-cost"
+      ],
+      "reply": "Medical cannabis flower typically costs around £7–£9 per gram, with £8 per gram listed as the average price; costs vary by strain. [kb_UK_how-does-dispensed-work_9] [kb_UK_how-much-does-dispensed-cost_1]",
+      "latency_ms": 2125,
+      "cost_usd": 0.0033914899999999996
+    },
+    {
+      "id": "t_027",
+      "text": "Are you regulated by the CQC?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/faqs/care-quality-commission-cqc",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.7419,
+      "top_sources": [
+        "https://dispensed.co.uk/faqs/care-quality-commission-cqc",
+        "https://dispensed.co.uk/faqs/care-quality-commission-cqc",
+        "https://dispensed.co.uk/faqs/care-quality-commission-cqc",
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/faqs/care-quality-commission-cqc"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/faqs/care-quality-commission-cqc"
+      ],
+      "reply": "Yes. Dispensed is fully registered with the Care Quality Commission (CQC) and is legally authorised to provide regulated healthcare services in England. [kb_UK_care-quality-commission-cqc_1]",
+      "latency_ms": 1761,
+      "cost_usd": 0.00263891
+    },
+    {
+      "id": "t_029",
+      "text": "Do you need my GP records before the appointment?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/info/how-does-dispensed-work",
+      "decision": "PARTIAL",
+      "decision_reason": "partly answered: Whether the GP records must be received before the appointment is not stated.",
+      "top_score": 0.5111,
+      "top_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/about-us",
+        "https://dispensed.co.uk/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/terms-conditions"
+      ],
+      "reply": "After you complete the questionnaire, Dispensed will ask for your consent to contact your GP and request a secure copy of your Summary Care Record. [kb_UK_how-does-dispensed-work_12] Consent to access your Summary Care Record or equivalent medical data is part of the registration requirements. [kb_UK_terms-conditions_4] The published information does not confirm whether the records must be received before your appointment, so please contact the support team to check.",
+      "latency_ms": 3484,
+      "cost_usd": 0.00405145
+    },
+    {
+      "id": "t_030",
+      "text": "Can I get a refund on medication once it's been dispatched?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/refund-policy",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.7846,
+      "top_sources": [
+        "https://dispensed.co.uk/refund-policy",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/info/understanding-our-delivery-process",
+        "https://dispensed.co.uk/refund-policy",
+        "https://dispensed.co.uk/info/how-does-dispensed-work"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/refund-policy",
+        "https://dispensed.co.uk/terms-conditions"
+      ],
+      "reply": "Generally, no. Refunds, returns or exchanges for prescription medication are not available once it has been dispatched, unless required by consumer law. [kb_UK_refund-policy_4] You may be entitled to a refund or replacement if the medication is faulty, damaged, not as described, unsafe, contaminated or otherwise not of satisfactory quality; contact Dispensed or the partner pharmacy within 3 calendar days of delivery, and you may need to provide photographic evidence. [kb_UK_terms-conditions_26]",
+      "latency_ms": 2158,
+      "cost_usd": 0.00378026
+    },
+    {
+      "id": "t_031",
+      "text": "How do I make a complaint?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/complaints-leaflet",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 3 cited passage(s)",
+      "top_score": 0.7103,
+      "top_sources": [
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/info/how-does-dispensed-work"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/complaints-leaflet"
+      ],
+      "reply": "Please first discuss your complaint with a member of staff. If it cannot be resolved immediately, contact the Complaints Manager for further guidance; for a formal complaint, contact the Head of Medical Operations, ideally in writing by email or post. [kb_UK_complaints-leaflet_2] You can also contact the clinic at complaints@dispensed.co.uk, on 020 3892 1903, or at 301-305 High St, Croydon CR0 1QL. [kb_UK_complaints-leaflet_4] Complaints should be raised as soon as possible, or within 12 months of the incident or becoming aware of the matter, and receipt will be acknowledged within three working days. [kb_UK_complaints-leaflet_3]",
+      "latency_ms": 2679,
+      "cost_usd": 0.00444139
+    },
+    {
+      "id": "t_032",
+      "text": "How long do I have to make a complaint?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/complaints-leaflet",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.64,
+      "top_sources": [
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/info/how-does-dispensed-work"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/complaints-leaflet"
+      ],
+      "reply": "If you cannot raise your complaint immediately, you should provide the details within 12 months of the incident that caused the issue, or within 12 months of becoming aware of the matter. [kb_UK_complaints-leaflet_3] The clinic also encourages you to complain as soon as possible, ideally within a few days. [kb_UK_complaints-leaflet_2]",
+      "latency_ms": 3529,
+      "cost_usd": 0.0034852
+    },
+    {
+      "id": "t_033",
+      "text": "When is the follow-up appointment after the first one?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/info/how-does-dispensed-work",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.626,
+      "top_sources": [
+        "https://dispensed.co.uk/info/how-much-does-dispensed-cost",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/info/how-does-dispensed-work"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work"
+      ],
+      "reply": "The follow-up appointment should be booked approximately 28 days after your initial consultation, to review your treatment progress. [kb_UK_how-does-dispensed-work_16]",
+      "latency_ms": 1691,
+      "cost_usd": 0.00248397
+    },
+    {
+      "id": "t_034",
+      "text": "Do you dispatch at weekends?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/info/understanding-our-delivery-process",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.636,
+      "top_sources": [
+        "https://dispensed.co.uk/info/understanding-our-delivery-process",
+        "https://dispensed.co.uk/info/understanding-our-delivery-process",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/info/contact"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/info/understanding-our-delivery-process"
+      ],
+      "reply": "No. Dispatches are not made on weekends or public holidays. Orders placed after 3pm on Thursday, or at any time on Friday, are processed the following Monday. [kb_UK_understanding-our-delivery-process_2]",
+      "latency_ms": 2357,
+      "cost_usd": 0.00299637
+    },
+    {
+      "id": "t_035",
+      "text": "What's the cutoff for orders to ship before the weekend?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/info/understanding-our-delivery-process",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.451,
+      "top_sources": [
+        "https://dispensed.co.uk/info/understanding-our-delivery-process",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/info/understanding-our-delivery-process",
+        "https://dispensed.co.uk/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/info/understanding-our-delivery-process"
+      ],
+      "reply": "Orders placed by 3pm on Thursday will be dispatched on Friday. Orders placed after 3pm on Thursday, or at any time on Friday, will be processed the following Monday, and no dispatches are made on weekends or public holidays [kb_UK_understanding-our-delivery-process_2].",
+      "latency_ms": 2155,
+      "cost_usd": 0.0028489899999999996
+    },
+    {
+      "id": "t_036",
+      "text": "Will the pharmacy check my ID?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/info/how-does-dispensed-work",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.5943,
+      "top_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/refund-policy",
+        "https://dispensed.co.uk/info/understanding-our-delivery-process",
+        "https://dispensed.co.uk/faqs/medical-cannabis-card"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work"
+      ],
+      "reply": "Yes. Before dispatch, the pharmacy completes an ID check as part of its standard compliance checks for all UK patients. [kb_UK_how-does-dispensed-work_15]",
+      "latency_ms": 3079,
+      "cost_usd": 0.00308764
+    },
+    {
+      "id": "t_037",
+      "text": "Do I need a referral?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/info/how-does-dispensed-work",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.6011,
+      "top_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/faqs/medical-uses",
+        "https://dispensed.co.uk/faqs/legal-status",
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/faqs/work-driving-holidays"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work"
+      ],
+      "reply": "No, you don’t need a referral—you can come directly to Dispensed for advice and clinical guidance. [kb_UK_how-does-dispensed-work_14]",
+      "latency_ms": 2005,
+      "cost_usd": 0.0021176199999999997
+    },
+    {
+      "id": "t_038",
+      "text": "How do I request a refund and how long do I have?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/refund-policy",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.5128,
+      "top_sources": [
+        "https://dispensed.co.uk/refund-policy",
+        "https://dispensed.co.uk/refund-policy",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/faqs/free-consultations"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/refund-policy",
+        "https://dispensed.co.uk/terms-conditions"
+      ],
+      "reply": "For appointment or service refunds, submit your request by email within 30 days of booking; approved refunds are processed to the original payment method. [kb_UK_refund-policy_1] Cancellations need at least 24 hours’ notice, and services already provided, missed appointments, or cancellations with less than 24 hours’ notice generally are not refundable. [kb_UK_refund-policy_1] For prescription medication, contact Dispensed or the partner pharmacy within 3 calendar days of delivery if it is faulty, damaged, incorrect, unsafe, contaminated, or not as described; refunds are generally unavailable once medication has been dispatched otherwise. [kb_UK_terms-conditions_26]",
+      "latency_ms": 4299,
+      "cost_usd": 0.00581651
+    },
+    {
+      "id": "t_039",
+      "text": "What's your email address for support?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/info/contact",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.4039,
+      "top_sources": [
+        "https://dispensed.co.uk/info/contact",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/faqs/work-driving-holidays",
+        "https://dispensed.co.uk/complaints-leaflet",
+        "https://dispensed.co.uk/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/info/contact",
+        "https://dispensed.co.uk/faqs/work-driving-holidays"
+      ],
+      "reply": "For general support enquiries, email info@dispensed.co.uk [kb_UK_contact_2]. For Patient Support, you can email support@dispensed.co.uk [kb_UK_work-driving-holidays_5].",
+      "latency_ms": 1972,
+      "cost_usd": 0.00302141
+    },
+    {
+      "id": "t_040",
+      "text": "Can I switch to you from another clinic?",
+      "jurisdiction": "UK",
+      "expected_source_url": "https://dispensed.co.uk/info/how-does-dispensed-work",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.7196,
+      "top_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work",
+        "https://dispensed.co.uk/zero-tolerance-policy",
+        "https://dispensed.co.uk/refund-policy",
+        "https://dispensed.co.uk/terms-conditions",
+        "https://dispensed.co.uk/zero-tolerance-policy"
+      ],
+      "cited_sources": [
+        "https://dispensed.co.uk/info/how-does-dispensed-work"
+      ],
+      "reply": "Yes. If you’re currently receiving care elsewhere, give us permission to contact your current clinic to request a discharge letter and help ensure continuity of care when you switch. [kb_UK_how-does-dispensed-work_12]",
+      "latency_ms": 2187,
+      "cost_usd": 0.00300893
+    },
+    {
+      "id": "t_041",
+      "text": "Is shipping free in New Zealand?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.4561,
+      "top_sources": [
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+        "/admin/conversations/6aafbcc3d8e454d7d299224b",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/terms-conditions"
+      ],
+      "cited_sources": [
+        "/admin/conversations/6aafbcc3d8e454d7d299224b"
+      ],
+      "reply": "Yes. NZ Post tracked shipping is free in New Zealand, and the tracking link is emailed when the parcel leaves the pharmacy. [kb_NZ_promoted_99224b_mu9phj3j]",
+      "latency_ms": 2045,
+      "cost_usd": 0.00270764
+    },
+    {
+      "id": "t_042",
+      "text": "How much is the missed appointment fee?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.5868,
+      "top_sources": [
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work"
+      ],
+      "cited_sources": [
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost"
+      ],
+      "reply": "The missed appointment fee is NZ$29. It may apply if you miss, cancel or reschedule a consultation with less than 48 hours’ notice. [kb_NZ_how-much-does-dispensed-cost_1]",
+      "latency_ms": 2007,
+      "cost_usd": 0.00263016
+    },
+    {
+      "id": "t_043",
+      "text": "What does a treatment plan cost per month?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.6784,
+      "top_sources": [
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work"
+      ],
+      "cited_sources": [
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work"
+      ],
+      "reply": "Treatment plans start at $79 per month in New Zealand. [kb_NZ_how-does-dispensed-work_4] This includes medication, delivery, follow-up consultations and ongoing care, with no extra fees. [kb_NZ_how-does-dispensed-work_4]",
+      "latency_ms": 1879,
+      "cost_usd": 0.00285143
+    },
+    {
+      "id": "t_044",
+      "text": "Can I use my own pharmacy instead of your partner pharmacy?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/terms-conditions",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.5547,
+      "top_sources": [
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://www.dispensed.co.nz/terms-conditions"
+      ],
+      "reply": "Yes, you can use your own pharmacy instead of a Partner Pharmacy, but a script request fee of NZ $40 will apply. [kb_NZ_terms-conditions_15]",
+      "latency_ms": 2754,
+      "cost_usd": 0.00369274
+    },
+    {
+      "id": "t_045",
+      "text": "Which courier do you use?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+      "decision": "PARTIAL",
+      "decision_reason": "partly answered: Which specific courier is used.",
+      "top_score": 0.3829,
+      "top_sources": [
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/info/contact",
+        "https://www.dispensed.co.nz/info/contact",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/info/contact",
+        "https://www.dispensed.co.nz/info/contact"
+      ],
+      "reply": "The published information does not specify which courier is used. It says that a partner pharmacy fills your prescription and delivers your medicine directly to your door in discreet packaging. [kb_NZ_how-does-dispensed-work_9] Please contact the support team via support@dispensed.co.nz or Live Chat for the courier details. [kb_NZ_contact_1][kb_NZ_contact_2]",
+      "latency_ms": 2985,
+      "cost_usd": 0.0031501199999999997
+    },
+    {
+      "id": "t_046",
+      "text": "How long does delivery take?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/info/understanding-our-delivery-process",
+      "decision": "PARTIAL",
+      "decision_reason": "partly answered: The transit time and exact delivery arrival date are not specified.",
+      "top_score": 0.5448,
+      "top_sources": [
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/info/understanding-our-delivery-process",
+        "/admin/conversations/6aafbcc3d8e454d7d299224b",
+        "https://www.dispensed.co.nz/info/understanding-our-delivery-process",
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost"
+      ],
+      "cited_sources": [
+        "https://www.dispensed.co.nz/info/understanding-our-delivery-process"
+      ],
+      "reply": "Once the pharmacy has received your payment and the hard-copy prescription, your medication is typically prepared for dispatch within 4–5 working days [kb_NZ_understanding-our-delivery-process_2]. Orders placed after 12pm on Friday are processed the following Monday, and no dispatches are made on weekends or public holidays [kb_NZ_understanding-our-delivery-process_2]. The published information does not specify the transit time or exact arrival date; please contact the support team for that information.",
+      "latency_ms": 3274,
+      "cost_usd": 0.00420387
+    },
+    {
+      "id": "t_047",
+      "text": "If I pay on a Friday afternoon, when does it ship?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/info/understanding-our-delivery-process",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.5222,
+      "top_sources": [
+        "/admin/conversations/6aafbcc3d8e454d7d299224b",
+        "https://www.dispensed.co.nz/info/understanding-our-delivery-process",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost"
+      ],
+      "cited_sources": [
+        "/admin/conversations/6aafbcc3d8e454d7d299224b",
+        "https://www.dispensed.co.nz/info/understanding-our-delivery-process"
+      ],
+      "reply": "If you pay after 12pm on Friday, your order is processed on Monday. Once payment and the hard-copy prescription have been received, dispatch typically takes 4–5 working days, and there are no weekend or public-holiday dispatches. [kb_NZ_promoted_99224b_mu9phj3j] [kb_NZ_understanding-our-delivery-process_2]",
+      "latency_ms": 2215,
+      "cost_usd": 0.00308026
+    },
+    {
+      "id": "t_048",
+      "text": "Are your doctors registered with the Medical Council of New Zealand?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.6204,
+      "top_sources": [
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/privacy-policy",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work"
+      ],
+      "reply": "Yes. Dispensed says its doctors are registered with the Medical Council of New Zealand (MCNZ). [kb_NZ_how-does-dispensed-work_1]",
+      "latency_ms": 1603,
+      "cost_usd": 0.0034639899999999997
+    },
+    {
+      "id": "t_049",
+      "text": "Is the first consult free?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 3 cited passage(s)",
+      "top_score": 0.7002,
+      "top_sources": [
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work"
+      ],
+      "cited_sources": [
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/terms-conditions"
+      ],
+      "reply": "Yes. The first appointment, which includes a full clinical assessment, is $0, and the initial consultation is listed as $0. [kb_NZ_how-much-does-dispensed-cost_1] [kb_NZ_how-does-dispensed-work_3] A NZ$0.10 refundable card-verification fee is charged when booking your first consultation, and a NZ$29 missed-consult fee may apply if you miss or cancel/reschedule with less than 48 hours’ notice. [kb_NZ_terms-conditions_13] [kb_NZ_how-much-does-dispensed-cost_1]",
+      "latency_ms": 2608,
+      "cost_usd": 0.00373137
+    },
+    {
+      "id": "t_050",
+      "text": "Can I get a same-day consultation?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 2 cited passage(s)",
+      "top_score": 0.6873,
+      "top_sources": [
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+        "https://www.dispensed.co.nz/info/contact",
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost"
+      ],
+      "cited_sources": [
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work"
+      ],
+      "reply": "Yes. In New Zealand, same-day consultation slots are available, so you could speak with a clinician today. Complete the Health Evaluation Form, then select your consultation time; if appropriate, the same-day consultation is $0. [kb_NZ_how-does-dispensed-work_5] [kb_NZ_how-does-dispensed-work_7]",
+      "latency_ms": 2324,
+      "cost_usd": 0.0032626599999999997
+    },
+    {
+      "id": "t_051",
+      "text": "Do I have to sign for the parcel?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/terms-conditions",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.5519,
+      "top_sources": [
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "/admin/conversations/6aafbcc3d8e454d7d299224b",
+        "https://www.dispensed.co.nz/terms-conditions"
+      ],
+      "cited_sources": [
+        "https://www.dispensed.co.nz/terms-conditions"
+      ],
+      "reply": "Yes. All Partner Pharmacy deliveries require a signature upon acceptance, and someone should be available to sign between 9am and 5pm, Monday to Friday. [kb_NZ_terms-conditions_18] If nobody is available, the parcel will be taken to the nearest post office for collection and a card with instructions will be left at your address. [kb_NZ_terms-conditions_18]",
+      "latency_ms": 2066,
+      "cost_usd": 0.00314518
+    },
+    {
+      "id": "t_052",
+      "text": "What if the wrong product arrives?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/terms-conditions",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.5523,
+      "top_sources": [
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "/admin/conversations/6aafbcc3d8e454d7d299224b"
+      ],
+      "cited_sources": [
+        "https://www.dispensed.co.nz/terms-conditions"
+      ],
+      "reply": "Please contact Dispensed or the relevant Partner Pharmacy directly within 3 days of receiving the incorrect product. [kb_NZ_terms-conditions_20] You may need to provide a photo of the product to process a refund or replacement, and if the pharmacy accepts that it was incorrect, you will not have to pay the return freight. [kb_NZ_terms-conditions_20]",
+      "latency_ms": 2719,
+      "cost_usd": 0.00364139
+    },
+    {
+      "id": "t_053",
+      "text": "Is there a lock-in contract?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.5534,
+      "top_sources": [
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost"
+      ],
+      "cited_sources": [
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work"
+      ],
+      "reply": "No. There is no lock-in contract, and you can pause or opt out of the service at any time without hidden fees. [kb_NZ_how-does-dispensed-work_6]",
+      "latency_ms": 1834,
+      "cost_usd": 0.00287764
+    },
+    {
+      "id": "t_054",
+      "text": "How do I get in touch with you?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/info/contact",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.281,
+      "top_sources": [
+        "https://www.dispensed.co.nz/info/contact",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/info/contact",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work"
+      ],
+      "cited_sources": [
+        "https://www.dispensed.co.nz/info/contact"
+      ],
+      "reply": "You can contact the support team at support@dispensed.co.nz for general enquiries or to share documentation. [kb_NZ_contact_1] You can also use the Live Chat by opening the chat box at the bottom of the website, where a real person can help. [kb_NZ_contact_1]",
+      "latency_ms": 1889,
+      "cost_usd": 0.00267018
+    },
+    {
+      "id": "t_055",
+      "text": "Is the delivery tracked?",
+      "jurisdiction": "NZ",
+      "expected_source_url": "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+      "decision": "ANSWERED",
+      "decision_reason": "answered from 1 cited passage(s)",
+      "top_score": 0.4748,
+      "top_sources": [
+        "/admin/conversations/6aafbcc3d8e454d7d299224b",
+        "https://www.dispensed.co.nz/info/how-much-does-dispensed-cost",
+        "https://www.dispensed.co.nz/info/understanding-our-delivery-process",
+        "https://www.dispensed.co.nz/terms-conditions",
+        "https://www.dispensed.co.nz/info/how-does-dispensed-work"
+      ],
+      "cited_sources": [
+        "/admin/conversations/6aafbcc3d8e454d7d299224b"
+      ],
+      "reply": "Yes. NZ Post shipping is tracked, and the tracking link is emailed when your parcel leaves the pharmacy. [kb_NZ_promoted_99224b_mu9phj3j]",
+      "latency_ms": 1909,
+      "cost_usd": 0.00266135
+    }
+  ]
+}

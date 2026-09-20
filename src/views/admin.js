@@ -2,7 +2,7 @@ import { layout, esc } from './layout.js';
 
 const badge = (v) => `<span class="badge b-${esc(v)}">${esc(String(v ?? '').replace(/_/g, ' '))}</span>`;
 const when = (d) => (d ? new Date(d).toLocaleString('en-AU', { dateStyle: 'medium', timeStyle: 'short' }) : '');
-const scoreClass = (s) => (s >= 0.55 ? '' : s >= 0.35 ? 'mid' : 'low');
+const scoreClass = (s) => (s >= 0.45 ? '' : s >= 0.30 ? 'mid' : 'low');
 
 export function listPage({ conversations, filters, posthog }) {
   const opt = (name, values, cur) =>
@@ -13,8 +13,7 @@ export function listPage({ conversations, filters, posthog }) {
     .map(
       (c) => `<tr>
   <td class="mono">${when(c.started_at)}</td>
-  <td><a href="/admin/conversations/${c._id}">${esc(c.first_line)}</a>${c.urgency === 'urgent' ? ' <span class="badge b-ADVERSE_EVENT">urgent</span>' : ''}</td>
-  <td>${badge(c.risk_category)}</td>
+  <td><a href="/admin/conversations/${c._id}">${esc(c.first_line)}</a></td>
   <td>${badge(c.decision)}</td>
   <td>${badge(c.status)}</td>
   <td>${esc(c.jurisdiction)} <span class="muted">(${esc(c.jurisdiction_source || '')})</span></td>
@@ -24,16 +23,16 @@ export function listPage({ conversations, filters, posthog }) {
   const body = `
 <h1>Conversations</h1>
 <form class="toolbar" method="get">
-  ${opt('status', ['open', 'auto_resolved', 'awaiting_human', 'resolved'], filters.status)}
-  ${opt('decision', ['AUTO_ANSWER', 'DRAFT_FOR_APPROVAL', 'ESCALATE'], filters.decision)}
-  ${opt('category', ['CLINICAL', 'ADVERSE_EVENT', 'REGULATORY', 'ACCOUNT_SPECIFIC', 'GENERAL_INFO', 'OUT_OF_SCOPE'], filters.category)}
+  ${opt('status', ['open', 'resolved'], filters.status)}
+  ${opt('decision', ['ANSWERED', 'PARTIAL', 'NOT_COVERED'], filters.decision)}
+  ${opt('jurisdiction', ['AU', 'UK', 'NZ', 'UNKNOWN'], filters.jurisdiction)}
   <span class="muted">${conversations.length} shown</span>
   <span style="flex:1"></span>
   <form method="post" action="/admin/reset" class="inline-form" onsubmit="return confirm('Wipe all conversations and re-seed the demo?')"><button class="btn btn-ghost btn-sm">Reset demo</button></form>
 </form>
 <table>
-<thead><tr><th>Time</th><th>Patient message</th><th>Risk</th><th>Decision</th><th>Status</th><th>Jurisdiction</th></tr></thead>
-<tbody>${rows || '<tr><td colspan="6" class="muted">No conversations yet.</td></tr>'}</tbody>
+<thead><tr><th>Time</th><th>Patient message</th><th>Decision</th><th>Status</th><th>Jurisdiction</th></tr></thead>
+<tbody>${rows || '<tr><td colspan="5" class="muted">No conversations yet.</td></tr>'}</tbody>
 </table>`;
   return layout({ title: 'Conversations', body, admin: true, posthog });
 }
@@ -50,29 +49,21 @@ export function detailPage({ conversation: c, messages, posthog, flash }) {
   const decisionPanels = agents
     .map(
       (m, i) => `<div class="panel">
-  <h3>Decision ${agents.length > 1 ? i + 1 : ''} ${badge(m.decision)}</h3>
+  <h3>Reply ${agents.length > 1 ? i + 1 : ''} ${badge(m.decision)}</h3>
   <dl class="kv">
     <dt>Reason</dt><dd>${esc(m.decision_reason)}</dd>
-    <dt>Risk category</dt><dd>${badge(m.risk?.category)} <span class="muted">${esc(m.risk?.reason || '')}</span></dd>
-    <dt>Urgency</dt><dd>${esc(m.risk?.urgency)}</dd>
-    <dt>Jurisdiction</dt><dd>${esc(m.jurisdiction)} <span class="muted">via ${esc(m.jurisdiction_source)} (classifier: ${esc(m.risk?.jurisdiction)}, ${esc(m.risk?.jurisdiction_evidence)})</span></dd>
-    <dt>Top score</dt><dd>${m.top_score == null ? '<span class="muted">no retrieval (gate 1 stopped it)</span>' : `<span class="score ${scoreClass(m.top_score)}">${m.top_score.toFixed(3)}</span> <span class="muted">floor ${m.thresholds?.floor} · auto ${m.thresholds?.auto}</span>`}</dd>
+    <dt>Jurisdiction</dt><dd>${esc(m.jurisdiction)} <span class="muted">via ${esc(m.jurisdiction_source)}</span></dd>
+    <dt>Top score</dt><dd>${m.top_score == null ? '<span class="muted">nothing retrieved</span>' : `<span class="score ${scoreClass(m.top_score)}">${m.top_score.toFixed(3)}</span>`}</dd>
     <dt>Composer</dt><dd>${m.composed ? `confidence ${m.composed.confidence?.toFixed(2)} · ${m.composed.fully_answered ? 'fully answered' : `partial: ${esc(m.composed.unanswered_part || '')}`}` : '<span class="muted">not run</span>'}</dd>
-    <dt>Grounding</dt><dd>${m.grounding ? (m.grounding.grounded ? '<span class="badge b-AUTO_ANSWER">grounded</span>' : `<span class="badge b-ESCALATE">not grounded</span> ${esc(m.grounding.unsupported_claims.join('; '))}`) : '<span class="muted">not run</span>'}</dd>
     <dt>Cost</dt><dd class="mono">${m.latency_ms} ms · ${m.tokens_in}+${m.tokens_out} tok · $${(m.cost_usd || 0).toFixed(4)} · ${esc(m.model || '')}</dd>
   </dl>
   ${m.retrieved_chunks?.length ? `<h3 style="margin-top:14px">Retrieved chunks</h3>${m.retrieved_chunks
     .map((ch, j) => {
       const s = m.retrieved?.[j]?.score ?? 0;
       const cited = m.composed?.cited_chunk_ids?.includes(ch.id);
-      return `<div class="chunk"><span class="score ${scoreClass(s)}">${s.toFixed(3)}</span> <span class="mono">${esc(ch.id)}</span> ${cited ? '<span class="badge b-AUTO_ANSWER">cited</span>' : ''} [${esc(ch.jurisdiction)}] <a href="${esc(ch.source_url)}" target="_blank" rel="noopener">${esc(ch.heading)}</a><pre>${esc(ch.text)}</pre></div>`;
+      return `<div class="chunk"><span class="score ${scoreClass(s)}">${s.toFixed(3)}</span> <span class="mono">${esc(ch.id)}</span> ${cited ? '<span class="badge b-ANSWERED">cited</span>' : ''} [${esc(ch.jurisdiction)}] <a href="${esc(ch.source_url)}" target="_blank" rel="noopener">${esc(ch.heading)}</a><pre>${esc(ch.text)}</pre></div>`;
     })
     .join('')}` : ''}
-  ${m.draft ? `<h3 style="margin-top:14px">Draft for approval</h3>
-  <form method="post" action="/admin/conversations/${c._id}/send">
-    <textarea class="wide" name="text" rows="6">${esc(m.draft)}</textarea>
-    <p><button class="btn btn-sm" ${c.status === 'resolved' ? 'disabled' : ''}>Send to patient</button> <span class="muted">Edits are sent as a human message and the conversation is resolved.</span></p>
-  </form>` : ''}
 </div>`,
     )
     .join('');
@@ -92,7 +83,7 @@ export function detailPage({ conversation: c, messages, posthog, flash }) {
 </div>`
       : `<div class="panel"><h3>Resolve</h3>
   <form method="post" action="/admin/conversations/${c._id}/resolve">
-    <textarea class="wide" name="note" rows="4" placeholder="What was the outcome? Write the answer the patient was given — it can be promoted to the knowledge base afterwards." required></textarea>
+    <textarea class="wide" name="note" rows="4" placeholder="What did the human answer? Write it here — it can be promoted to the knowledge base afterwards so the next patient gets it automatically." required></textarea>
     <p><button class="btn btn-sm">Resolve with outcome</button></p>
   </form>
 </div>`;
@@ -101,7 +92,7 @@ export function detailPage({ conversation: c, messages, posthog, flash }) {
 <p><a href="/admin">← Conversations</a></p>
 ${flash ? `<div class="notice">${esc(flash)}</div>` : ''}
 <h1>${esc(c.first_line)}</h1>
-<p class="muted">${when(c.started_at)} · ${badge(c.status)} ${badge(c.risk_category)} ${badge(c.decision)} · ${esc(c.jurisdiction)}${c.urgency === 'urgent' ? ' · <span class="badge b-ADVERSE_EVENT">urgent</span>' : ''}</p>
+<p class="muted">${when(c.started_at)} · ${badge(c.status)} ${badge(c.decision)} · ${esc(c.jurisdiction)}</p>
 <div class="grid">
   <div>
     <div class="panel"><h3>Transcript</h3><div class="thread" style="max-height:none">${transcript}</div></div>
@@ -113,27 +104,28 @@ ${flash ? `<div class="notice">${esc(flash)}</div>` : ''}
 }
 
 export function metricsPage({ m, posthog }) {
-  const reasons = m.escalationReasons
-    .map((r) => `<tr><td>${badge(r.category)}</td><td>${esc(r.reason)}</td><td class="mono">${r.n}</td></tr>`)
+  const jurs = m.byJur
+    .map((c) => `<div><div style="display:flex;justify-content:space-between;font-size:13px"><span>${esc(c.jurisdiction)}</span><span class="mono">${c.n}</span></div><div class="bar"><span style="width:${m.pct(c.n)}%"></span></div></div>`)
     .join('');
-  const cats = m.byCategory
-    .map((c) => `<div><div style="display:flex;justify-content:space-between;font-size:13px">${badge(c.category)}<span class="mono">${c.n}</span></div><div class="bar"><span style="width:${m.pct(c.n)}%"></span></div></div>`)
+  const gaps = m.gaps
+    .map((c) => `<tr><td><a href="/admin/conversations/${c._id}">${esc(c.first_line)}</a></td><td>${badge(c.decision)}</td><td>${esc(c.jurisdiction)}</td></tr>`)
     .join('');
   const body = `
 <h1>Metrics</h1>
 <div class="stats">
-  <div class="stat big"><div class="n">${m.clinicalAuto}</div><div class="l">clinical or adverse-event messages that received an automated answer</div></div>
+  <div class="stat big"><div class="n">${m.pct(m.answered)}<span style="font-size:40px">%</span></div><div class="l">of messages fully answered from published pages, with citations</div></div>
   <div class="stat"><div class="n">${m.total}</div><div class="l">messages processed</div></div>
-  <div class="stat"><div class="n">${m.auto}</div><div class="l">auto answered · ${m.pct(m.auto)}%</div></div>
-  <div class="stat"><div class="n">${m.draft}</div><div class="l">drafted for approval · ${m.pct(m.draft)}%</div></div>
-  <div class="stat"><div class="n">${m.esc}</div><div class="l">escalated · ${m.pct(m.esc)}%</div></div>
-  <div class="stat"><div class="n">${m.minutesSaved}</div><div class="l">estimated human minutes saved<br><span style="font-size:11.5px">Assumption: ${m.baseline} min average handling time per message (published live-chat benchmarks, applied uniformly). Auto answers save the full ${m.baseline} min; drafts save half. These are not the provider's real numbers.</span></div></div>
+  <div class="stat"><div class="n">${m.answered}</div><div class="l">answered · ${m.pct(m.answered)}%</div></div>
+  <div class="stat"><div class="n">${m.partial}</div><div class="l">partly answered · ${m.pct(m.partial)}%</div></div>
+  <div class="stat"><div class="n">${m.notCovered}</div><div class="l">not covered by published pages · ${m.pct(m.notCovered)}%</div></div>
+  <div class="stat"><div class="n">${m.minutesSaved}</div><div class="l">estimated human minutes saved<br><span style="font-size:11.5px">Assumption: ${m.baseline} min average handling time per message (published live-chat benchmarks, applied uniformly). Full ${m.baseline} min per answered message, half per partial. Not the provider's real numbers.</span></div></div>
   <div class="stat"><div class="n">${m.medianLatency}<span style="font-size:18px"> ms</span></div><div class="l">median end-to-end latency</div></div>
   <div class="stat"><div class="n">$${m.medianCost.toFixed(4)}</div><div class="l">median model cost per message (list prices, assumption)</div></div>
+  <div class="stat"><div class="n">${m.medianTopScore.toFixed(2)}</div><div class="l">median top retrieval score</div></div>
 </div>
 <div class="grid">
-  <div class="panel"><h3>Escalation reasons</h3><table><thead><tr><th>Category</th><th>Reason</th><th>n</th></tr></thead><tbody>${reasons || '<tr><td colspan="3" class="muted">none yet</td></tr>'}</tbody></table></div>
-  <div class="panel"><h3>Messages by risk category</h3><div style="display:grid;gap:10px">${cats || '<span class="muted">none yet</span>'}</div></div>
+  <div class="panel"><h3>Gaps: recent questions the pages could not fully answer</h3><p class="muted" style="font-size:12.5px">Resolve one with the human answer and promote it, and the next patient gets it automatically.</p><table><thead><tr><th>Question</th><th>Decision</th><th>Jur.</th></tr></thead><tbody>${gaps || '<tr><td colspan="3" class="muted">none yet</td></tr>'}</tbody></table></div>
+  <div class="panel"><h3>Messages by jurisdiction</h3><div style="display:grid;gap:10px">${jurs || '<span class="muted">none yet</span>'}</div></div>
 </div>`;
   return layout({ title: 'Metrics', body, admin: true, posthog });
 }
@@ -144,35 +136,27 @@ export function evalPage({ runs, posthog, flash }) {
   const card = (r) => {
     const s = r.results;
     return `<div class="stats">
-  <div class="stat big" style="padding:22px"><div class="n" style="font-size:64px">${pct(s.clinical_recall)}</div><div class="l">clinical recall (CLINICAL + ADVERSE_EVENT tickets that escalated) · target 100%</div></div>
-  <div class="stat"><div class="n">${pct(s.routing_accuracy)}</div><div class="l">routing accuracy</div></div>
-  <div class="stat"><div class="n">${s.false_auto_answers}</div><div class="l">false auto answers (unsafe tickets auto answered) · target 0</div></div>
-  <div class="stat"><div class="n">${pct(s.over_escalation_rate)}</div><div class="l">over-escalation (GENERAL_INFO that escalated)</div></div>
-  <div class="stat"><div class="n">${pct(s.groundedness_pass_rate)}</div><div class="l">groundedness pass rate</div></div>
-  <div class="stat"><div class="n">${pct(s.retrieval_hit_at_3)}</div><div class="l">retrieval hit@3 (correct source page)</div></div>
+  <div class="stat big" style="padding:22px"><div class="n" style="font-size:64px">${pct(s.retrieval_hit_at_3)}</div><div class="l">retrieval hit@3: a chunk from the labelled source page is in the top 3</div></div>
+  <div class="stat"><div class="n">${pct(s.retrieval_hit_at_5)}</div><div class="l">retrieval hit@5</div></div>
+  <div class="stat"><div class="n">${pct(s.cited_correct_page)}</div><div class="l">answer cites the labelled page</div></div>
+  <div class="stat"><div class="n">${pct(s.answered_rate)}</div><div class="l">fully answered</div></div>
+  <div class="stat"><div class="n">${pct(s.partial_rate)}</div><div class="l">partly answered</div></div>
+  <div class="stat"><div class="n">${pct(s.not_covered_rate)}</div><div class="l">not covered</div></div>
   <div class="stat"><div class="n">${s.median_latency_ms}<span style="font-size:18px"> ms</span></div><div class="l">median latency</div></div>
   <div class="stat"><div class="n">$${(s.median_cost_usd || 0).toFixed(4)}</div><div class="l">median cost per message</div></div>
 </div>`;
   };
-  const matrix = (s) => {
-    const cats = Object.keys(s.confusion || {});
-    if (!cats.length) return '';
-    const cols = [...new Set(cats.flatMap((k) => Object.keys(s.confusion[k])))].sort();
-    return `<div class="panel"><h3>Confusion matrix (rows expected, columns predicted)</h3><table><thead><tr><th></th>${cols.map((c) => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${cats
-      .map((k) => `<tr><td><strong>${esc(k)}</strong></td>${cols.map((c) => `<td class="mono" ${k === c ? 'style="background:var(--mint)"' : s.confusion[k][c] ? 'style="background:var(--pink)"' : ''}>${s.confusion[k][c] || ''}</td>`).join('')}</tr>`)
-      .join('')}</tbody></table></div>`;
-  };
   const history = runs
     .map(
-      (r) => `<tr><td class="mono">${when(r.run_at)}</td><td>${esc(r.notes || '')}</td><td class="mono">${r.thresholds?.floor} / ${r.thresholds?.auto}</td><td class="mono">${pct(r.results.routing_accuracy)}</td><td class="mono">${pct(r.results.clinical_recall)}</td><td class="mono">${r.results.false_auto_answers}</td><td class="mono">${pct(r.results.over_escalation_rate)}</td><td class="mono">${r.results.n}</td></tr>`,
+      (r) => `<tr><td class="mono">${when(r.run_at)}</td><td>${esc(r.notes || '')}</td><td class="mono">${pct(r.results.retrieval_hit_at_3)}</td><td class="mono">${pct(r.results.cited_correct_page)}</td><td class="mono">${pct(r.results.answered_rate)}</td><td class="mono">${r.results.n}</td></tr>`,
     )
     .join('');
   const body = `
 <h1>Eval</h1>
 ${flash ? `<div class="notice">${esc(flash)}</div>` : ''}
 <form method="post" action="/admin/eval/import" class="inline-form"><button class="btn btn-ghost btn-sm">Import committed runs</button></form>
-${latest ? `<p class="muted">Latest run ${when(latest.run_at)} · dataset ${esc(latest.dataset_version)} · thresholds floor ${latest.thresholds.floor} / auto ${latest.thresholds.auto} · ${esc(latest.notes || '')}</p>${card(latest)}${matrix(latest.results)}` : '<p class="muted">No eval runs yet. Run <code>npm run eval</code>.</p>'}
-<div class="panel"><h3>Run history</h3><table><thead><tr><th>Run</th><th>Notes</th><th>Floor / auto</th><th>Routing</th><th>Clinical recall</th><th>False auto</th><th>Over-esc.</th><th>n</th></tr></thead><tbody>${history || '<tr><td colspan="8" class="muted">none</td></tr>'}</tbody></table></div>`;
+${latest ? `<p class="muted">Latest run ${when(latest.run_at)} · dataset ${esc(latest.dataset_version)} · ${esc(latest.notes || '')}</p>${card(latest)}` : '<p class="muted">No eval runs yet. Run <code>npm run eval</code>.</p>'}
+<div class="panel"><h3>Run history</h3><table><thead><tr><th>Run</th><th>Notes</th><th>hit@3</th><th>Cites page</th><th>Answered</th><th>n</th></tr></thead><tbody>${history || '<tr><td colspan="6" class="muted">none</td></tr>'}</tbody></table></div>`;
   return layout({ title: 'Eval', body, admin: true, posthog });
 }
 
