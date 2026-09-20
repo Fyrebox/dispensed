@@ -75,7 +75,7 @@ npm test
 | Retrieval hit@3 (correct source page) | 85% | 91% |
 | Median latency / cost per message | 4.6 s / $0.0043 | 5.6 s / $0.0046 |
 
-From 120 messages after tuning: 35 were answered end to end, 11 were drafted for approval, 74 were escalated (52 of those by design: clinical, adverse-event, regulatory and account-specific), zero clinical questions received a clinical answer, at an estimated saving of ~162 human minutes against a stated 4-minute baseline.
+From 120 messages after tuning: 42 were answered end to end (35 from published pages with citations, 7 fixed out-of-scope replies), 11 were drafted for approval, 67 were escalated (59 of those by design: clinical, adverse-event, regulatory and account-specific), zero clinical questions received a clinical answer, at an estimated saving of ~190 human minutes against a stated 4-minute baseline (full 4 min per auto answer, 2 min per draft).
 
 What the tuning was: the spec's 0.55 auto threshold sits above `text-embedding-3-small`'s typical cosine score for a correct hit (0.40–0.50), so grounded, complete answers were being drafted instead of sent. The thresholds were chosen by replaying the first run's raw results under different values (`node scripts/eval.js --replay latest --floor 0.30 --auto 0.40`, no model calls), then confirmed with a fresh run. Two prompt refinements went in at the same time: "is the clinic regulated?" is GENERAL_INFO, not REGULATORY; and the composer stays on source wording.
 
