@@ -1,14 +1,33 @@
 import { Router } from 'express';
-import basicAuth from 'express-basic-auth';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { config } from '../config.js';
 import * as store from '../store.js';
 import { loadSnapshot, kbCounts } from '../kb.js';
-import { listPage, detailPage, metricsPage, evalPage, kbPage } from '../views/admin.js';
+import { listPage, detailPage, metricsPage, evalPage, kbPage, loginPage } from '../views/admin.js';
+import { requireAdmin, passwordMatches, issueToken, setCookie, clearCookie } from '../auth.js';
+import rateLimit from 'express-rate-limit';
 
 export const adminRouter = Router();
-adminRouter.use(basicAuth({ users: { [config.admin.user]: config.admin.pass }, challenge: true, realm: 'triage-admin' }));
+const loginLimiter = rateLimit({ windowMs: 15 * 60_000, limit: 20, standardHeaders: 'draft-7', legacyHeaders: false });
+
+adminRouter.get('/login', (req, res) => {
+  res.send(loginPage({ next: req.query.next, error: req.query.error, posthog: config.posthog }));
+});
+
+adminRouter.post('/login', loginLimiter, (req, res) => {
+  const next = typeof req.body.next === 'string' && req.body.next.startsWith('/admin') ? req.body.next : '/admin';
+  if (!passwordMatches(req.body.password)) return res.redirect(`/admin/login?error=1&next=${encodeURIComponent(next)}`);
+  setCookie(res, issueToken());
+  res.redirect(next);
+});
+
+adminRouter.post('/logout', (req, res) => {
+  clearCookie(res);
+  res.redirect('/admin/login');
+});
+
+adminRouter.use(requireAdmin);
 
 const ph = config.posthog;
 

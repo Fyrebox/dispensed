@@ -175,3 +175,18 @@ ${counts.mongo !== counts.chroma ? `<div class="notice">Store mismatch: ${counts
 <table><thead><tr><th>Id</th><th>Origin</th><th>Jur.</th><th>Topic</th><th>Heading</th></tr></thead><tbody>${rows}</tbody></table>`;
   return layout({ title: 'Knowledge base', body, admin: true, posthog });
 }
+
+export function loginPage({ next, error, posthog }) {
+  const body = `
+<section class="card" style="max-width:420px;margin:40px auto">
+  <h2 style="margin-bottom:6px">Admin console</h2>
+  <p class="muted" style="margin-top:0">Password only. No account needed.</p>
+  ${error ? '<div class="notice" style="background:var(--pink);color:var(--pink-2)">That password didn\'t match.</div>' : ''}
+  <form method="post" action="/admin/login">
+    <input type="hidden" name="next" value="${esc(next || '/admin')}">
+    <input class="wide" type="password" name="password" placeholder="Password" autofocus required autocomplete="current-password">
+    <p style="margin-bottom:0"><button class="btn">Sign in</button></p>
+  </form>
+</section>`;
+  return layout({ title: 'Sign in', body, admin: true, posthog, bare: true });
+}

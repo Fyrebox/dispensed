@@ -1,7 +1,7 @@
 export const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-export function layout({ title, body, admin = false, posthog }) {
+export function layout({ title, body, admin = false, posthog, bare = false }) {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -22,8 +22,10 @@ posthog.init(${JSON.stringify(posthog.key)},{api_host:${JSON.stringify(posthog.h
 <header class="topbar">
   <a class="wordmark" href="/">Triage Prototype</a>
   <nav>
-    ${admin
-      ? `<a href="/admin">Conversations</a><a href="/admin/kb">Knowledge base</a><a href="/admin/metrics">Metrics</a><a href="/admin/eval">Eval</a><a class="btn btn-ghost" href="/">Public chat</a>`
+    ${bare
+      ? `<a class="btn btn-ghost" href="/">Public chat</a>`
+      : admin
+      ? `<a href="/admin">Conversations</a><a href="/admin/kb">Knowledge base</a><a href="/admin/metrics">Metrics</a><a href="/admin/eval">Eval</a><a class="btn btn-ghost" href="/">Public chat</a><form method="post" action="/admin/logout" class="inline-form"><button class="btn btn-ghost btn-sm" style="padding:6px 12px">Sign out</button></form>`
       : `<a href="#how">How it works</a><a href="https://github.com/cyrilgaillard/triage-prototype" rel="noopener">Repo</a><a class="btn btn-ghost" href="/admin">Admin</a>`}
   </nav>
 </header>

@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "description": "Patient support triage agent prototype. Built for a job application. Not affiliated with any healthcare provider.",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
@@ -20,7 +22,6 @@
     "chromadb": "^3.0.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
-    "express-basic-auth": "^1.2.1",
     "express-rate-limit": "^7.4.0",
     "mongodb": "^6.9.0",
     "openai": "^5.0.0"

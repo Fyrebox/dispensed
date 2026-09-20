@@ -3,7 +3,7 @@ import { layout, esc } from './layout.js';
 export function chatPage({ posthog, detected }) {
   const body = `
 <section class="hero">
-  <h1>Ask your question.</h1>
+  <h1>Ask a question about Dispensed.</h1>
 </section>
 
 <section class="card chat" id="chat">
