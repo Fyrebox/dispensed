@@ -26,7 +26,7 @@ posthog.init(${JSON.stringify(posthog.key)},{api_host:${JSON.stringify(posthog.h
       ? `<a class="btn btn-ghost" href="/">Public chat</a>`
       : admin
       ? `<a href="/admin">Conversations</a><a href="/admin/kb">Knowledge base</a><a href="/admin/metrics">Metrics</a><a href="/admin/eval">Eval</a><a class="btn btn-ghost" href="/">Public chat</a><form method="post" action="/admin/logout" class="inline-form"><button class="btn btn-ghost btn-sm" style="padding:6px 12px">Sign out</button></form>`
-      : `<a href="#how">How it works</a><a href="https://github.com/cyrilgaillard/triage-prototype" rel="noopener">Repo</a><a class="btn btn-ghost" href="/admin">Admin</a>`}
+      : `<a href="#how">How it works</a><a href="https://github.com/Fyrebox/dispensed" rel="noopener">Repo</a><a class="btn btn-ghost" href="/admin">Admin</a>`}
   </nav>
 </header>
 <main class="page">${body}</main>
